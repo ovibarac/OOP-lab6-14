@@ -1,0 +1,656 @@
+        -:    0:Source:/home/ovi/work/oop/CLionProjects/lab6-7/FilmRepo.cpp
+        -:    0:Graph:/home/ovi/work/oop/CLionProjects/lab6-7/cmake-build-debug-coverage/CMakeFiles/lab6_7.dir/FilmRepo.cpp.gcno
+        -:    0:Data:/home/ovi/work/oop/CLionProjects/lab6-7/cmake-build-debug-coverage/CMakeFiles/lab6_7.dir/FilmRepo.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by ovi on 3/28/22.
+        -:    3://
+        -:    4:
+        -:    5:#include "FilmRepo.h"
+        -:    6:#include <assert.h>
+        -:    7:
+function _ZN8FilmRepo5storeERK4Film called 9 returned 78% blocks executed 63%
+        9:    8:void FilmRepo::store(const Film &film) {
+        9:    9:    if(exist(film)){
+        9:    9-block  0
+call    0 returned 9
+branch  1 taken 2 (fallthrough)
+branch  2 taken 7
+        2:   10:        throw FilmRepoException("Exista deja filmul: " + film.getTitlu());
+        2:   10-block  0
+call    0 returned 2
+call    1 returned 2
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0 (throw)
+        2:   10-block  1
+call    4 returned 2
+branch  5 taken 2 (fallthrough)
+branch  6 taken 0 (throw)
+        2:   10-block  2
+call    7 returned 2
+branch  8 taken 2 (fallthrough)
+branch  9 taken 0 (throw)
+        2:   10-block  3
+call   10 returned 2
+call   11 returned 2
+call   12 returned 0
+    $$$$$:   10-block  4
+call   13 never executed
+    $$$$$:   10-block  5
+    $$$$$:   10-block  6
+call   14 never executed
+    $$$$$:   10-block  7
+    $$$$$:   10-block  8
+call   15 never executed
+        -:   11:    }
+        7:   12:    all.push_back(film);
+        7:   12-block  0
+call    0 returned 7
+        7:   13:}
+        -:   14:
+function _ZNK8FilmRepo5existERK4Film called 9 returned 100% blocks executed 92%
+        9:   15:bool FilmRepo::exist(const Film &film) const {
+        -:   16:    /*
+        -:   17:     * Verifica daca exista filmul in lista
+        -:   18:     */
+        -:   19:    try{
+       16:   20:        find(film.getTitlu());
+        9:   20-block  0
+call    0 returned 9
+branch  1 taken 9 (fallthrough)
+branch  2 taken 0 (throw)
+        9:   20-block  1
+call    3 returned 9
+branch  4 taken 2 (fallthrough)
+branch  5 taken 7 (throw)
+        2:   20-block  2
+call    6 returned 2
+        7:   20-block  3
+call    7 returned 7
+        7:   20-block  4
+        2:   21:        return true;
+        -:   22:    }
+        7:   23:    catch(FilmRepoException& ){
+        7:   23-block  0
+call    0 returned 7
+        7:   24:        return false;
+        -:   25:    }
+        -:   26:}
+        -:   27:
+function _ZNK8FilmRepo4findENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 15 returned 47% blocks executed 78%
+       15:   28:const Film& FilmRepo::find(string titlu) const{
+        -:   29:    /*
+        -:   30:     * Cauta filmul cu titlul dat
+        -:   31:     * arunca exceptie daca nu exista
+        -:   32:     */
+       23:   33:    for(const auto& f : all){
+       15:   33-block  0
+call    0 returned 15
+call    1 returned 15
+       23:   33-block  1
+call    2 returned 23
+branch  3 taken 15 (fallthrough)
+branch  4 taken 8
+       15:   33-block  2
+call    5 returned 15
+        8:   33-block  3
+call    6 returned 8
+       15:   34:        if(f.getTitlu() == titlu){
+call    0 returned 15
+branch  1 taken 15 (fallthrough)
+branch  2 taken 0 (throw)
+       15:   34-block  0
+call    3 returned 15
+call    4 returned 15
+branch  5 taken 7 (fallthrough)
+branch  6 taken 8
+        7:   35:            return f;
+        7:   35-block  0
+        7:   35-block  1
+        -:   36:        }
+        -:   37:    }
+        -:   38:
+        8:   39:    throw FilmRepoException("Nu exista filmul: " + titlu);
+        8:   39-block  0
+call    0 returned 8
+call    1 returned 8
+branch  2 taken 8 (fallthrough)
+branch  3 taken 0 (throw)
+        8:   39-block  1
+call    4 returned 8
+branch  5 taken 8 (fallthrough)
+branch  6 taken 0 (throw)
+        8:   39-block  2
+call    7 returned 8
+call    8 returned 0
+    $$$$$:   39-block  3
+call    9 never executed
+    $$$$$:   39-block  4
+    $$$$$:   39-block  5
+call   10 never executed
+        -:   40:}
+        -:   41:
+function _ZNK8FilmRepo6getAllEv called 3 returned 100% blocks executed 100%
+        3:   42:const vector<Film>& FilmRepo::getAll()const noexcept{
+        -:   43:    /*
+        -:   44:     * Returneaza toate filmele
+        -:   45:     */
+        3:   46:    return all;
+        3:   46-block  0
+        -:   47:}
+        -:   48:
+function _ZlsRSoRK17FilmRepoException called 0 returned 0% blocks executed 0%
+    #####:   49:ostream& operator<<(ostream& out, const FilmRepoException& ex){
+    #####:   50:    out<< ex.msg;
+    %%%%%:   50-block  0
+call    0 never executed
+    #####:   51:    return out;
+        -:   52:}
+        -:   53:
+function _Z11testAddRepov called 1 returned 100% blocks executed 56%
+        1:   54:void testAddRepo(){
+        -:   55:    /*
+        -:   56:     * Testeaza adaugarea unui film
+        -:   57:     */
+        2:   58:    FilmRepo repo;
+        1:   58-block  0
+call    0 returned 1
+call    1 returned 1
+    $$$$$:   58-block  1
+call    2 never executed
+        1:   59:    repo.store(Film{"Madagascar", "comedie", 2005, "Leul Alex"});
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   59-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   59-block  1
+call    8 returned 1
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   59-block  2
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+        1:   59-block  3
+call   15 returned 1
+branch 16 taken 1 (fallthrough)
+branch 17 taken 0 (throw)
+        1:   59-block  4
+call   18 returned 1
+call   19 returned 1
+call   20 returned 1
+call   21 returned 1
+call   22 returned 1
+call   23 returned 1
+call   24 returned 1
+    $$$$$:   59-block  5
+call   25 never executed
+    $$$$$:   59-block  6
+    $$$$$:   59-block  7
+call   26 never executed
+    $$$$$:   59-block  8
+    $$$$$:   59-block  9
+call   27 never executed
+    $$$$$:   59-block 10
+    $$$$$:   59-block 11
+call   28 never executed
+    $$$$$:   59-block 12
+    $$$$$:   59-block 13
+call   29 never executed
+    $$$$$:   59-block 14
+    $$$$$:   59-block 15
+call   30 never executed
+    $$$$$:   59-block 16
+    $$$$$:   59-block 17
+call   31 never executed
+    $$$$$:   59-block 18
+       1*:   60:    assert(repo.getAll().size() == 1);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 1
+    %%%%%:   60-block  0
+call    4 never executed
+       1*:   61:    assert(repo.find("Madagascar").getTitlu() == "Madagascar");
+        1:   61-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   61-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   61-block  2
+call    7 returned 1
+branch  8 taken 1 (fallthrough)
+branch  9 taken 0 (throw)
+        1:   61-block  3
+call   10 returned 1
+branch 11 taken 0 (fallthrough)
+branch 12 taken 1
+    %%%%%:   61-block  4
+call   13 never executed
+        1:   61-block  5
+call   14 returned 1
+call   15 returned 1
+call   16 returned 1
+    $$$$$:   61-block  6
+call   17 never executed
+    $$$$$:   61-block  7
+    $$$$$:   61-block  8
+call   18 never executed
+    $$$$$:   61-block  9
+       1*:   62:    assert(repo.find("Madagascar").getGen() == "comedie");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   62-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   62-block  1
+call    7 returned 1
+branch  8 taken 1 (fallthrough)
+branch  9 taken 0 (throw)
+        1:   62-block  2
+call   10 returned 1
+branch 11 taken 0 (fallthrough)
+branch 12 taken 1
+    %%%%%:   62-block  3
+call   13 never executed
+        1:   62-block  4
+call   14 returned 1
+call   15 returned 1
+call   16 returned 1
+    $$$$$:   62-block  5
+call   17 never executed
+    $$$$$:   62-block  6
+    $$$$$:   62-block  7
+call   18 never executed
+    $$$$$:   62-block  8
+       1*:   63:    assert(repo.find("Madagascar").getAn() == 2005);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   63-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   63-block  1
+call    7 returned 1
+branch  8 taken 0 (fallthrough)
+branch  9 taken 1
+    %%%%%:   63-block  2
+call   10 never executed
+        1:   63-block  3
+call   11 returned 1
+call   12 returned 1
+    $$$$$:   63-block  4
+call   13 never executed
+    $$$$$:   63-block  5
+    $$$$$:   63-block  6
+call   14 never executed
+    $$$$$:   63-block  7
+       1*:   64:    assert(repo.find("Madagascar").getActor() == "Leul Alex");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   64-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   64-block  1
+call    7 returned 1
+branch  8 taken 1 (fallthrough)
+branch  9 taken 0 (throw)
+        1:   64-block  2
+call   10 returned 1
+branch 11 taken 0 (fallthrough)
+branch 12 taken 1
+    %%%%%:   64-block  3
+call   13 never executed
+        1:   64-block  4
+call   14 returned 1
+call   15 returned 1
+call   16 returned 1
+    $$$$$:   64-block  5
+call   17 never executed
+    $$$$$:   64-block  6
+    $$$$$:   64-block  7
+call   18 never executed
+    $$$$$:   64-block  8
+        -:   65:
+        1:   66:    repo.store(Film{"a", "b", 1990, "c"});
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   66-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   66-block  1
+call    8 returned 1
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   66-block  2
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+        1:   66-block  3
+call   15 returned 1
+branch 16 taken 1 (fallthrough)
+branch 17 taken 0 (throw)
+        1:   66-block  4
+call   18 returned 1
+call   19 returned 1
+call   20 returned 1
+call   21 returned 1
+call   22 returned 1
+call   23 returned 1
+call   24 returned 1
+    $$$$$:   66-block  5
+call   25 never executed
+    $$$$$:   66-block  6
+    $$$$$:   66-block  7
+call   26 never executed
+    $$$$$:   66-block  8
+    $$$$$:   66-block  9
+call   27 never executed
+    $$$$$:   66-block 10
+    $$$$$:   66-block 11
+call   28 never executed
+    $$$$$:   66-block 12
+    $$$$$:   66-block 13
+call   29 never executed
+    $$$$$:   66-block 14
+    $$$$$:   66-block 15
+call   30 never executed
+    $$$$$:   66-block 16
+    $$$$$:   66-block 17
+call   31 never executed
+    $$$$$:   66-block 18
+       1*:   67:    assert(repo.getAll().size() == 2);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 1
+    %%%%%:   67-block  0
+call    4 never executed
+        -:   68:
+        -:   69:    try{
+       8*:   70:        repo.store(Film{"a", "b", 2000, "d"});
+        1:   70-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   70-block  1
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   70-block  2
+call    8 returned 1
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   70-block  3
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+        1:   70-block  4
+call   15 returned 1
+branch 16 taken 0 (fallthrough)
+branch 17 taken 1 (throw)
+    %%%%%:   70-block  5
+call   18 never executed
+call   19 never executed
+call   20 never executed
+call   21 never executed
+call   22 never executed
+call   23 never executed
+call   24 never executed
+        1:   70-block  6
+call   25 returned 1
+        1:   70-block  7
+        1:   70-block  8
+call   26 returned 1
+        1:   70-block  9
+        1:   70-block 10
+call   27 returned 1
+        1:   70-block 11
+        1:   70-block 12
+call   28 returned 1
+        1:   70-block 13
+        1:   70-block 14
+call   29 returned 1
+        1:   70-block 15
+        1:   70-block 16
+call   30 returned 1
+        1:   70-block 17
+        1:   70-block 18
+call   31 returned 1
+        1:   70-block 19
+    #####:   71:        assert(false);
+call    0 never executed
+        -:   72:    }
+        1:   73:    catch (const FilmRepoException&){
+        1:   73-block  0
+call    0 returned 1
+call    1 returned 1
+        -:   74:        assert(true);
+        -:   75:    }
+        1:   76:}
+        -:   77:
+function _Z13testCautaRepov called 1 returned 100% blocks executed 51%
+        1:   78:void testCautaRepo(){
+        -:   79:    /*
+        -:   80:     * Testeaza cautarea unui film
+        -:   81:     */
+        -:   82:
+        2:   83:    FilmRepo repo;
+        1:   83-block  0
+call    0 returned 1
+call    1 returned 1
+    $$$$$:   83-block  1
+call    2 never executed
+        1:   84:    repo.store(Film{"a", "b", 1990, "c"});
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   84-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   84-block  1
+call    8 returned 1
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   84-block  2
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+        1:   84-block  3
+call   15 returned 1
+branch 16 taken 1 (fallthrough)
+branch 17 taken 0 (throw)
+        1:   84-block  4
+call   18 returned 1
+call   19 returned 1
+call   20 returned 1
+call   21 returned 1
+call   22 returned 1
+call   23 returned 1
+call   24 returned 1
+    $$$$$:   84-block  5
+call   25 never executed
+    $$$$$:   84-block  6
+    $$$$$:   84-block  7
+call   26 never executed
+    $$$$$:   84-block  8
+    $$$$$:   84-block  9
+call   27 never executed
+    $$$$$:   84-block 10
+    $$$$$:   84-block 11
+call   28 never executed
+    $$$$$:   84-block 12
+    $$$$$:   84-block 13
+call   29 never executed
+    $$$$$:   84-block 14
+    $$$$$:   84-block 15
+call   30 never executed
+    $$$$$:   84-block 16
+    $$$$$:   84-block 17
+call   31 never executed
+    $$$$$:   84-block 18
+        1:   85:    repo.store(Film{"b", "b", 1990, "c"});
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   85-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   85-block  1
+call    8 returned 1
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   85-block  2
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+        1:   85-block  3
+call   15 returned 1
+branch 16 taken 1 (fallthrough)
+branch 17 taken 0 (throw)
+        1:   85-block  4
+call   18 returned 1
+call   19 returned 1
+call   20 returned 1
+call   21 returned 1
+call   22 returned 1
+call   23 returned 1
+call   24 returned 1
+    $$$$$:   85-block  5
+call   25 never executed
+    $$$$$:   85-block  6
+    $$$$$:   85-block  7
+call   26 never executed
+    $$$$$:   85-block  8
+    $$$$$:   85-block  9
+call   27 never executed
+    $$$$$:   85-block 10
+    $$$$$:   85-block 11
+call   28 never executed
+    $$$$$:   85-block 12
+    $$$$$:   85-block 13
+call   29 never executed
+    $$$$$:   85-block 14
+    $$$$$:   85-block 15
+call   30 never executed
+    $$$$$:   85-block 16
+    $$$$$:   85-block 17
+call   31 never executed
+    $$$$$:   85-block 18
+        -:   86:
+        3:   87:    auto f = repo.find("a");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   87-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   87-block  1
+call    7 returned 1
+branch  8 taken 1 (fallthrough)
+branch  9 taken 0 (throw)
+call   10 returned 1
+    $$$$$:   87-block  2
+    $$$$$:   87-block  3
+call   11 returned 1
+    $$$$$:   87-block  4
+call   12 never executed
+       1*:   88:    assert(f.getTitlu() == "a");
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   88-block  0
+call    3 returned 1
+branch  4 taken 0 (fallthrough)
+branch  5 taken 1
+    %%%%%:   88-block  1
+call    6 never executed
+        1:   88-block  2
+call    7 returned 1
+       1*:   89:    assert(f.getGen() == "b");
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   89-block  0
+call    3 returned 1
+branch  4 taken 0 (fallthrough)
+branch  5 taken 1
+    %%%%%:   89-block  1
+call    6 never executed
+        1:   89-block  2
+call    7 returned 1
+        -:   90:
+        -:   91:    try{
+       3*:   92:        repo.find("c");
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   92-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1 (throw)
+    %%%%%:   92-block  1
+call    7 never executed
+call    8 never executed
+        1:   92-block  2
+call    9 returned 1
+        1:   92-block  3
+        1:   92-block  4
+call   10 returned 1
+        1:   92-block  5
+    #####:   93:        assert(false);
+call    0 never executed
+        -:   94:    }
+        1:   95:    catch(FilmRepoException&){
+        1:   95-block  0
+call    0 returned 1
+call    1 returned 1
+        -:   96:        assert(true);
+        -:   97:    }
+        1:   98:}
+        -:   99:
+function _Z9testeRepov called 1 returned 100% blocks executed 100%
+        1:  100:void testeRepo(){
+        1:  101:    testAddRepo();
+        1:  101-block  0
+call    0 returned 1
+        1:  102:    testCautaRepo();
+call    0 returned 1
+        1:  103:}

@@ -1,0 +1,4 @@
+/home/ovi/Programs/clion-2021.3.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/ovi/Programs/clion-2021.3.4/bin/ninja/linux/ninja -G Ninja /home/ovi/work/oop/CLionProjects/lab6-7
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ovi/work/oop/CLionProjects/lab6-7/cmake-build-debug

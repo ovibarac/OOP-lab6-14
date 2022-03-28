@@ -1,0 +1,558 @@
+        -:    0:Source:/home/ovi/work/oop/CLionProjects/lab6-7/UI.cpp
+        -:    0:Graph:/home/ovi/work/oop/CLionProjects/lab6-7/cmake-build-debug-coverage/CMakeFiles/lab6_7.dir/UI.cpp.gcno
+        -:    0:Data:/home/ovi/work/oop/CLionProjects/lab6-7/cmake-build-debug-coverage/CMakeFiles/lab6_7.dir/UI.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by ovi on 3/28/22.
+        -:    3://
+        -:    4:
+        -:    5:#include "UI.h"
+        -:    6:#include <iostream>
+        -:    7:#include <string>
+        -:    8:
+        -:    9:using std::cout;
+        -:   10:using std::cin;
+        -:   11:
+function _ZN2UI5addUIEv called 0 returned 0% blocks executed 0%
+    #####:   12:void UI::addUI() {
+        -:   13:    /*
+        -:   14:    * Citeste datele de la tastatura si adauga un film
+        -:   15:    */
+    #####:   16:    string titlu, gen, actor;
+    %%%%%:   16-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    %%%%%:   16-block  1
+call    3 never executed
+call    4 never executed
+call    5 never executed
+    $$$$$:   16-block  2
+call    6 never executed
+    $$$$$:   16-block  3
+call    7 never executed
+    $$$$$:   16-block  4
+call    8 never executed
+        -:   17:    int an;
+    #####:   18:    cout<<"Titlul: ";
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   19:    cin>>titlu;
+    %%%%%:   19-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   20:    cout<<"Gen: ";
+    %%%%%:   20-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   21:    cin>>gen;
+    %%%%%:   21-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   22:    cout<<"Anul aparitiei: ";
+    %%%%%:   22-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   23:    cin>>an;
+    %%%%%:   23-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   24:    cout<<"Actorul principal: ";
+    %%%%%:   24-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   25:    cin>>actor;
+    %%%%%:   25-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   26:
+    #####:   27:    srv.addFilm(titlu, gen, an, actor);
+    %%%%%:   27-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   27-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   27-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:   27-block  3
+call    9 never executed
+call   10 never executed
+    $$$$$:   27-block  4
+call   11 never executed
+    $$$$$:   27-block  5
+    $$$$$:   27-block  6
+call   12 never executed
+    $$$$$:   27-block  7
+    #####:   28:    cout<<"Adaugat cu succes!\n";
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   29:}
+        -:   30:
+function _ZN2UI9tiparesteERKSt6vectorI4FilmSaIS1_EE called 0 returned 0% blocks executed 0%
+    #####:   31:void UI::tipareste(const vector<Film> &filme) {
+        -:   32:    /*
+        -:   33:     * Printeaza lista de filme
+        -:   34:     */
+    #####:   35:    cout<<"Filme: \n";
+    %%%%%:   35-block  0
+call    0 never executed
+    #####:   36:    for(const auto& film : filme){
+call    0 never executed
+call    1 never executed
+    %%%%%:   36-block  0
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:   36-block  1
+call    5 never executed
+    #####:   37:        cout<<film.getTitlu()<<", "<<film.getGen()<<", "<<film.getAn()<<", "<<film.getActor()<<'\n';
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   37-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   37-block  1
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:   37-block  2
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   37-block  3
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:   37-block  4
+call   15 never executed
+branch 16 never executed
+branch 17 never executed
+    %%%%%:   37-block  5
+call   18 never executed
+call   19 never executed
+branch 20 never executed
+branch 21 never executed
+    %%%%%:   37-block  6
+call   22 never executed
+branch 23 never executed
+branch 24 never executed
+    %%%%%:   37-block  7
+call   25 never executed
+branch 26 never executed
+branch 27 never executed
+    %%%%%:   37-block  8
+call   28 never executed
+branch 29 never executed
+branch 30 never executed
+    %%%%%:   37-block  9
+call   31 never executed
+branch 32 never executed
+branch 33 never executed
+    %%%%%:   37-block 10
+call   34 never executed
+call   35 never executed
+call   36 never executed
+call   37 never executed
+    $$$$$:   37-block 11
+call   38 never executed
+    $$$$$:   37-block 12
+    $$$$$:   37-block 13
+call   39 never executed
+    $$$$$:   37-block 14
+    $$$$$:   37-block 15
+call   40 never executed
+    $$$$$:   37-block 16
+        -:   38:    }
+    #####:   39:    cout<<"\n";
+    %%%%%:   39-block  0
+call    0 never executed
+        -:   40:
+        -:   41:
+    #####:   42:}
+        -:   43:
+function _ZN2UI8generateEv called 0 returned 0% blocks executed 0%
+    #####:   44:void UI::generate(){
+        -:   45:    /*
+        -:   46:     * Populeaza lista de filme
+        -:   47:     */
+    #####:   48:    srv.addFilm("Hannibal", "horror", 1970, "Anthony Hopkins");
+    %%%%%:   48-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   48-block  1
+call    4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   48-block  2
+call    8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   48-block  3
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:   48-block  4
+call   15 never executed
+call   16 never executed
+call   17 never executed
+call   18 never executed
+call   19 never executed
+call   20 never executed
+    $$$$$:   48-block  5
+call   21 never executed
+    $$$$$:   48-block  6
+    $$$$$:   48-block  7
+call   22 never executed
+    $$$$$:   48-block  8
+    $$$$$:   48-block  9
+call   23 never executed
+    $$$$$:   48-block 10
+    $$$$$:   48-block 11
+call   24 never executed
+    $$$$$:   48-block 12
+    $$$$$:   48-block 13
+call   25 never executed
+    $$$$$:   48-block 14
+    $$$$$:   48-block 15
+call   26 never executed
+    $$$$$:   48-block 16
+call   27 never executed
+    #####:   49:    srv.addFilm("Shrek", "comedie", 2005, "Mike Meyers");
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   49-block  0
+call    4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   49-block  1
+call    8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   49-block  2
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:   49-block  3
+call   15 never executed
+call   16 never executed
+call   17 never executed
+call   18 never executed
+call   19 never executed
+call   20 never executed
+    $$$$$:   49-block  4
+call   21 never executed
+    $$$$$:   49-block  5
+    $$$$$:   49-block  6
+call   22 never executed
+    $$$$$:   49-block  7
+    $$$$$:   49-block  8
+call   23 never executed
+    $$$$$:   49-block  9
+    $$$$$:   49-block 10
+call   24 never executed
+    $$$$$:   49-block 11
+    $$$$$:   49-block 12
+call   25 never executed
+    $$$$$:   49-block 13
+    $$$$$:   49-block 14
+call   26 never executed
+    $$$$$:   49-block 15
+call   27 never executed
+    #####:   50:    srv.addFilm("Pretty woman", "romcom", 1990, "Julia Roberts");
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   50-block  0
+call    4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   50-block  1
+call    8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   50-block  2
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:   50-block  3
+call   15 never executed
+call   16 never executed
+call   17 never executed
+call   18 never executed
+call   19 never executed
+call   20 never executed
+    $$$$$:   50-block  4
+call   21 never executed
+    $$$$$:   50-block  5
+    $$$$$:   50-block  6
+call   22 never executed
+    $$$$$:   50-block  7
+    $$$$$:   50-block  8
+call   23 never executed
+    $$$$$:   50-block  9
+    $$$$$:   50-block 10
+call   24 never executed
+    $$$$$:   50-block 11
+    $$$$$:   50-block 12
+call   25 never executed
+    $$$$$:   50-block 13
+    $$$$$:   50-block 14
+call   26 never executed
+    $$$$$:   50-block 15
+call   27 never executed
+    #####:   51:    srv.addFilm("Twilight", "drama", 2010, "Robert Pattinson");
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   51-block  0
+call    4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   51-block  1
+call    8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   51-block  2
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:   51-block  3
+call   15 never executed
+call   16 never executed
+call   17 never executed
+call   18 never executed
+call   19 never executed
+call   20 never executed
+    $$$$$:   51-block  4
+call   21 never executed
+    $$$$$:   51-block  5
+    $$$$$:   51-block  6
+call   22 never executed
+    $$$$$:   51-block  7
+    $$$$$:   51-block  8
+call   23 never executed
+    $$$$$:   51-block  9
+    $$$$$:   51-block 10
+call   24 never executed
+    $$$$$:   51-block 11
+    $$$$$:   51-block 12
+call   25 never executed
+    $$$$$:   51-block 13
+    $$$$$:   51-block 14
+call   26 never executed
+    $$$$$:   51-block 15
+call   27 never executed
+    #####:   52:    srv.addFilm("Dirty Dancing", "romcom", 1980, "Patrick Swayze");
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   52-block  0
+call    4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   52-block  1
+call    8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   52-block  2
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:   52-block  3
+call   15 never executed
+call   16 never executed
+call   17 never executed
+call   18 never executed
+call   19 never executed
+call   20 never executed
+    $$$$$:   52-block  4
+call   21 never executed
+    $$$$$:   52-block  5
+    $$$$$:   52-block  6
+call   22 never executed
+    $$$$$:   52-block  7
+    $$$$$:   52-block  8
+call   23 never executed
+    $$$$$:   52-block  9
+    $$$$$:   52-block 10
+call   24 never executed
+    $$$$$:   52-block 11
+    $$$$$:   52-block 12
+call   25 never executed
+    $$$$$:   52-block 13
+    $$$$$:   52-block 14
+call   26 never executed
+    $$$$$:   52-block 15
+call   27 never executed
+    #####:   53:    srv.addFilm("Legends of the fall", "drama", 1990, "Brad Pitt");
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   53-block  0
+call    4 never executed
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   53-block  1
+call    8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   53-block  2
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:   53-block  3
+call   15 never executed
+call   16 never executed
+call   17 never executed
+call   18 never executed
+call   19 never executed
+call   20 never executed
+    $$$$$:   53-block  4
+call   21 never executed
+    $$$$$:   53-block  5
+    $$$$$:   53-block  6
+call   22 never executed
+    $$$$$:   53-block  7
+    $$$$$:   53-block  8
+call   23 never executed
+    $$$$$:   53-block  9
+    $$$$$:   53-block 10
+call   24 never executed
+    $$$$$:   53-block 11
+    $$$$$:   53-block 12
+call   25 never executed
+    $$$$$:   53-block 13
+    $$$$$:   53-block 14
+call   26 never executed
+    #####:   54:}
+        -:   55:
+function _ZN2UI3runEv called 0 returned 0% blocks executed 0%
+    #####:   56:void UI::run() {
+        -:   57:    /*
+        -:   58:     * Ruleaza aplicatia
+        -:   59:     */
+        -:   60:    while(true){
+    #####:   61:        cout<<"1. Adauga\n2.Tipareste\n";
+    %%%%%:   61-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   62:        int cmd;
+    #####:   63:        cin>>cmd;
+    %%%%%:   63-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   64:        try{
+    #####:   65:            switch(cmd){
+    %%%%%:   65-block  0
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:   66:                case 1:
+    #####:   67:                    addUI();
+    %%%%%:   67-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   68:                    break;
+    %%%%%:   68-block  0
+    #####:   69:                case 2:
+    #####:   70:                    tipareste(srv.getAll());
+    %%%%%:   70-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:   71:                    break;
+    %%%%%:   71-block  0
+    #####:   72:                case 0:
+    #####:   73:                    return;
+    %%%%%:   73-block  0
+    %%%%%:   73-block  1
+    #####:   74:                default:
+    #####:   75:                    cout<<"Comanda invalida\n";
+    %%%%%:   75-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   76:                    break;
+    %%%%%:   76-block  0
+        -:   77:            }
+        -:   78:        }
+    =====:   79:        catch (const FilmRepoException& ex){
+    $$$$$:   79-block  0
+call    0 never executed
+    $$$$$:   79-block  1
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    $$$$$:   79-block  2
+call    4 never executed
+    =====:   80:            cout<<ex<<'\n';
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    $$$$$:   80-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:   81:        }
+    =====:   82:        catch(const ValidateException& ex){
+    $$$$$:   82-block  0
+call    0 never executed
+    $$$$$:   82-block  1
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    $$$$$:   82-block  2
+call    4 never executed
+    =====:   83:            cout<<ex<<'\n';
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    $$$$$:   83-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:   84:        }
+    #####:   85:    }
+    %%%%%:   85-block  0
+        -:   86:}

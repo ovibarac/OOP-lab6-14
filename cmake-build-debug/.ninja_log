@@ -1,0 +1,8 @@
+# ninja log v5
+1188	1465	1648495569123163889	lab6_7	986987c46c05aff7
+2	1188	1648495568847162355	CMakeFiles/lab6_7.dir/main.cpp.o	1bd3152399dad14b
+2	1419	1648493533435967740	CMakeFiles/lab6_7.dir/FilmRepo.cpp.o	61e4fd8da7ceb8ef
+8	2335	1648478720122337100	CMakeFiles/lab6_7.dir/Validator.cpp.o	f09f01d20e9e26f1
+3	2149	1648495414110303423	CMakeFiles/lab6_7.dir/UI.cpp.o	266d0235daaa9a5f
+3	1839	1648478719626333229	CMakeFiles/lab6_7.dir/Film.cpp.o	84564e805af7aec9
+2	1226	1648493588068266700	CMakeFiles/lab6_7.dir/FilmService.cpp.o	8a0b57a2fea5db2a
