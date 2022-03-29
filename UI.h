@@ -20,6 +20,11 @@ class UI {
      */
     void tipareste(const vector<Film>& filme);
 
+    /*
+     * Cauta un film
+     */
+    void findUI();
+
 public:
     UI(FilmService& s): srv{s}{}
 

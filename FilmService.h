@@ -29,6 +29,12 @@ public:
      * arunca exceptie daca: exista deja titlul, nu este valid
      */
     void addFilm(const string& titlu, string gen, int an, string actor);
+
+    /*
+     * Cauta filmul cu titlul dat
+     * arunca exceptie daca nu exista
+     */
+    const Film& find(const string& titlu);
 };
 
 void testSrv();

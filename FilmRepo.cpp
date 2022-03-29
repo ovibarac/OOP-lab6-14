@@ -46,10 +46,7 @@ const vector<Film>& FilmRepo::getAll()const noexcept{
     return all;
 }
 
-ostream& operator<<(ostream& out, const FilmRepoException& ex){
-    out<< ex.msg;
-    return out;
-}
+ostream& operator<<(ostream& out, const FilmRepoException& ex){out<< ex.msg;return out;}
 
 void testAddRepo(){
     /*
@@ -67,8 +64,7 @@ void testAddRepo(){
     assert(repo.getAll().size() == 2);
 
     try{
-        repo.store(Film{"a", "b", 2000, "d"});
-        assert(false);
+        repo.store(Film{"a", "b", 2000, "d"});assert(false);
     }
     catch (const FilmRepoException&){
         assert(true);
@@ -89,15 +85,35 @@ void testCautaRepo(){
     assert(f.getGen() == "b");
 
     try{
-        repo.find("c");
-        assert(false);
+        repo.find("c");assert(false);
     }
     catch(FilmRepoException&){
         assert(true);
     }
 }
 
+
+void testExist(){
+    FilmRepo repo;
+    repo.store(Film{"a", "b", 1990, "c"});
+    repo.store(Film{"b", "b", 1990, "c"});
+    auto f = Film{"a", "b", 1990, "c"};
+    assert(repo.exist(f) == true);
+    f = Film{"b", "b", 1990, "c"};
+    assert(repo.exist(f) == true);
+    f=Film{"c", "b", 1990, "c"};
+    assert(repo.exist(f) == false);
+}
+
+void testGetAllRepo(){
+    FilmRepo repo;
+    auto f = Film{"a", "b", 1990, "c"};
+    repo.store(f);
+    assert(repo.getAll().size() == 1);
+}
 void testeRepo(){
     testAddRepo();
     testCautaRepo();
+    testExist();
+    testGetAllRepo();
 }

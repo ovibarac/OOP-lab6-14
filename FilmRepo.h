@@ -15,13 +15,13 @@ using namespace std;
 class FilmRepo {
     vector<Film> all;
 
+public:
+    FilmRepo() = default;
+
     /*
      * Verifica daca exista filmul in lista
      */
     bool exist(const Film& film) const;
-
-public:
-    FilmRepo() = default;
 
     /*
      * Salvarea unui film
