@@ -54,6 +54,26 @@ void UI::findUI(){
 
 }
 
+void UI::modUI() {
+    /*
+     * Modifica un film
+     */
+    string titlu, new_gen, new_actor;
+    int new_an;
+    cout<<"Titlul: ";
+    cin>>titlu;
+
+    cout<<"Noul gen: \n";
+    cin>>new_gen;
+    cout<<"Noul an: \n";
+    cin>>new_an;
+    cout<<"Noul actor: \n";
+    cin>>new_actor;
+
+    srv.modFilm(titlu, new_gen, new_an, new_actor);
+    cout<<"Modificare efectuata cu succes\n";
+}
+
 void UI::generate(){
     /*
      * Populeaza lista de filme
@@ -73,7 +93,7 @@ void UI::run() {
      * Ruleaza aplicatia
      */
     while(true){
-        cout<<"1. Adauga\n2.Tipareste\n3.Cauta\n";
+        cout<<"1.Adauga\n2.Tipareste\n3.Cauta\n4.Modifica\n0. Exit\n";
         int cmd;
         cin>>cmd;
         try{
@@ -86,6 +106,9 @@ void UI::run() {
                     break;
                 case 3:
                     findUI();
+                    break;
+                case 4:
+                    modUI();
                     break;
                 case 0:
                     return;

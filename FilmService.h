@@ -35,6 +35,16 @@ public:
      * arunca exceptie daca nu exista
      */
     const Film& find(const string& titlu);
+
+    /*
+     * Modifica genul, anul si actorul principal al unui film
+     * arunca exceptie daca filmul nu exista
+     */
+    void modFilm(const string& titlu, string new_gen, int new_an, string new_actor);
+
+    /*
+     * Sterge un film
+     */
 };
 
 void testSrv();

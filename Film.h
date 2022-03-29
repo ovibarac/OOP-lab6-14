@@ -32,6 +32,18 @@ public:
     string getActor() const{
         return actor;
     }
+
+    void setGen(string& new_gen){
+        gen = new_gen;
+    }
+
+    void setAn(int& new_an){
+        an = new_an;
+    }
+
+    void setActor(string& new_actor){
+        actor = new_actor;
+    }
 };
 
 

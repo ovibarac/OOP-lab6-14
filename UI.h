@@ -25,6 +25,11 @@ class UI {
      */
     void findUI();
 
+    /*
+     * Modifica un film
+     */
+    void modUI();
+
 public:
     UI(FilmService& s): srv{s}{}
 

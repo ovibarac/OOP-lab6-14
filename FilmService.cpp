@@ -23,6 +23,21 @@ const Film& FilmService::find(const string& titlu){
      */
     return repo.find(titlu);
 }
+
+void FilmService::modFilm(const string& titlu, string new_gen, int new_an, string new_actor){
+    /*
+    * Modifica genul, anul si actorul principal al unui film
+     * titlu: titlul cautat
+     * new_gen, new_an, new_actor: datele noi
+    * arunca exceptie daca filmul nu exista sau modificarea nu e valida
+    */
+    Film& film = const_cast<Film &>(find(titlu));
+    val.validate(Film {titlu, new_gen, new_an, new_actor});
+    film.setGen(new_gen);
+    film.setAn(new_an);
+    film.setActor(new_actor);
+}
+
 void testAddSrv(){
     /*
      * Testeaza adaugarea service
@@ -67,7 +82,23 @@ void testFindSrv(){
         assert(true);
     }
 }
+
+void testModSrv(){
+    FilmRepo repo;
+    Validator val;
+    FilmService srv {repo, val};
+    srv.addFilm("a", "b", 1990, "c");
+    srv.addFilm("b", "b", 1990, "c");
+
+    srv.modFilm("b", "x", 2000,"y");
+    assert(srv.getAll()[1].getGen() == "x");
+    assert(srv.getAll()[1].getAn() == 2000);
+    assert(srv.getAll()[1].getActor() == "y");
+
+}
+
 void testSrv(){
     testAddSrv();
     testFindSrv();
+    testModSrv();
 }

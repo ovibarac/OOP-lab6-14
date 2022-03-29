@@ -20,5 +20,5 @@ void start(){
 
 int main() {
     testAll();
-    //start();
+    start();
 }
