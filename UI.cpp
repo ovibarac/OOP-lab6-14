@@ -14,18 +14,33 @@ void UI::addUI() {
     * Citeste datele de la tastatura si adauga un film
     */
     string titlu, gen, actor;
+    string str_an;
     int an;
     cout<<"Titlul: \n";
     cin>>titlu;
     cout<<"Gen: \n";
     cin>>gen;
     cout<<"Anul aparitiei: \n";
-    cin>>an;
-    cout<<"Actorul principal: \n";
-    cin>>actor;
+    cin>>str_an;
+    try{
+        an=stoi(str_an);
 
-    srv.addFilm(titlu, gen, an, actor);
-    cout<<"Adaugat cu succes!\n";
+        cout<<"Actorul principal: \n";
+        cin>>actor;
+
+        srv.addFilm(titlu, gen, an, actor);
+        cout<<"Adaugat cu succes!\n";
+    }
+    catch (const FilmRepoException& ex){
+        cout<<ex<<'\n';
+    }
+    catch(const ValidateException& ex){
+        cout<<ex<<'\n';
+    }
+    catch(...){
+        cout<<"An invalid\n";
+    }
+
 }
 
 void UI::tipareste(const vector<Film> &filme) {
@@ -59,6 +74,7 @@ void UI::modUI() {
      * Modifica un film
      */
     string titlu, new_gen, new_actor;
+    string str_an;
     int new_an;
     cout<<"Titlul: ";
     cin>>titlu;
@@ -66,12 +82,26 @@ void UI::modUI() {
     cout<<"Noul gen: \n";
     cin>>new_gen;
     cout<<"Noul an: \n";
-    cin>>new_an;
-    cout<<"Noul actor: \n";
-    cin>>new_actor;
+    cin>>str_an;
+    try{
+        new_an = stoi(str_an);
 
-    srv.modFilm(titlu, new_gen, new_an, new_actor);
-    cout<<"Modificare efectuata cu succes\n";
+        cout<<"Noul actor: \n";
+        cin>>new_actor;
+
+        srv.modFilm(titlu, new_gen, new_an, new_actor);
+        cout<<"Modificare efectuata cu succes\n";
+    }
+    catch (const FilmRepoException& ex){
+        cout<<ex<<'\n';
+    }
+    catch(const ValidateException& ex){
+        cout<<ex<<'\n';
+    }
+    catch(...){
+        cout<<"An invalid\n";
+    }
+
 }
 
 void UI::generate(){
