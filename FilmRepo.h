@@ -30,6 +30,8 @@ public:
      */
     void store(const Film& film);
 
+    void deleteFilm(string titlu);
+
     /*
      * Cauta filmul cu titlul dat
      * arunca exceptie daca nu exista

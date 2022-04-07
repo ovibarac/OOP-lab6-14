@@ -12,6 +12,10 @@ void FilmRepo::store(const Film &film) {
     all.add(film);
 }
 
+void FilmRepo::deleteFilm(string titlu){
+    all.deleteFilm(titlu);
+}
+
 bool FilmRepo::exist(const Film &film) const {
     /*
      * Verifica daca exista filmul in lista

@@ -55,6 +55,8 @@ public:
 
     void add(const ElementT& el);
 
+    void deleteFilm(string titlu);
+
     ElementT& get(int poz) const;
 
     void set(int poz, const ElementT& el);
@@ -66,6 +68,18 @@ public:
     IteratorVectorT<ElementT> begin();
     IteratorVectorT<ElementT> end();
 
+    void generalSort(bool(*maimicF)(const Film&, const Film&)){
+        for(int i = 0; i< size(); i++){
+            for(int j = i+1; j<size(); j++){
+                if(!maimicF(elems[i], elems[j])){
+                    Film aux = elems[i];
+                    elems[i] = elems[j];
+                    elems[j] = aux;
+                }
+            }
+        }
+    }
+
 
 private:
     int lg;//numar elemente
@@ -74,6 +88,17 @@ private:
 
     void ensureCapacity();
 };
+
+template<typename ElementT>
+void MyVector<ElementT>::deleteFilm(string titlu){
+    MyVector<ElementT> rez;
+    for(int i = 0; i< size(); i++) {
+        if(elems[i].getTitlu() != titlu){
+            rez.add(elems[i]);
+        }
+    }
+    *this = rez;
+}
 
 /*
 Constructor default
@@ -232,7 +257,7 @@ public:
     IteratorVectorT(const MyVector<ElementT>& v) noexcept;
     IteratorVectorT(const MyVector<ElementT>& v, int poz)noexcept;
     bool valid()const;
-    ElementT& element() const;
+    ElementT& element()const;
     void next();
     ElementT& operator*();
     IteratorVectorT& operator++();
@@ -252,7 +277,7 @@ bool IteratorVectorT<ElementT>::valid()const {
 }
 
 template<typename ElementT>
-ElementT& IteratorVectorT<ElementT>::element() const {
+ElementT& IteratorVectorT<ElementT>::element() const{
     return v.elems[poz];
 }
 

@@ -30,6 +30,15 @@ class UI {
      */
     void modUI();
 
+    /*
+     * Sterge un film
+     */
+    void deleteUI();
+
+    void filterUI();
+
+    void sortUI();
+
 public:
     UI(FilmService& s): srv{s}{}
 

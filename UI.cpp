@@ -108,18 +108,60 @@ void UI::modUI() {
 
 }
 
+void UI::deleteUI() {
+    string titlu;
+    cout<<"Titlu: \n";
+    cin>>titlu;
+    srv.deleteFilm(titlu);
+    tipareste(srv.getAll());
+}
+
+void UI::filterUI() {
+    string titlu;
+    string an_str;
+    int cmd;
+    cout<<"1.Filtrare titlu\n2.Filtrare anul aparitiei\n";
+    cin>>cmd;
+    if(cmd==1){
+        cout<<"Tiltu: \n";
+        cin>>titlu;
+        tipareste(srv.filtrareTitlu(titlu));
+    }else if(cmd==2){
+        cout<<"Anul aparitiei: \n";
+        cin>>an_str;
+        try{
+            int an = stoi(an_str);
+            tipareste(srv.filtrareAn(an));
+        }catch(...){
+            cout<<"An invalid\n";
+        }
+    }
+}
+
+void UI::sortUI() {
+    int cmd;
+    cout<<"Sortare dupa:\n1.Titlu\n2.Actor principal\n3.Anul aparitiei + gen\n";
+    cin>>cmd;
+    if(cmd == 1){
+        tipareste(srv.sortByTitlu());
+    }else if(cmd == 2){
+        tipareste(srv.sortByActor());
+    }else if(cmd == 3){
+        tipareste(srv.sortByAn(srv.sortByGen()));
+    }
+}
+
 void UI::generate(){
     /*
      * Populeaza lista de filme
      */
     srv.addFilm("Hannibal", "horror", 1970, "Anthony Hopkins");
     srv.addFilm("Shrek", "comedie", 2005, "Mike Meyers");
-    //srv.addFilm("Pretty woman", "romcom", 1990, "Julia Roberts");
+    srv.addFilm("Pretty woman", "romcom", 1990, "Julia Roberts");
     srv.addFilm("Twilight", "drama", 2010, "Robert Pattinson");
-    //srv.addFilm("Dirty Dancing", "romcom", 1980, "Patrick Swayze");
-    //srv.addFilm("Legends of the fall", "drama", 1990, "Brad Pitt");
+    srv.addFilm("Dirty Dancing", "romcom", 1980, "Patrick Swayze");
+    srv.addFilm("Legends of the fall", "drama", 1990, "Brad Pitt");
     srv.addFilm("Madagascar", "comedie", 2005, "Leul Alex");
-
 }
 
 void UI::run() {
@@ -127,7 +169,7 @@ void UI::run() {
      * Ruleaza aplicatia
      */
     while(true){
-        cout<<"1.Adauga\n2.Tipareste\n3.Cauta\n4.Modifica\n0. Exit\n";
+        cout<<"1.Adauga\n2.Tipareste\n3.Cauta\n4.Modifica\n5.Sterge\n6.Filtreaza\n7.Sort\n0. Exit\n";
         int cmd;
         cin>>cmd;
         try{
@@ -143,6 +185,15 @@ void UI::run() {
                     break;
                 case 4:
                     modUI();
+                    break;
+                case 5:
+                    deleteUI();
+                    break;
+                case 6:
+                    filterUI();
+                    break;
+                case 7:
+                    sortUI();
                     break;
                 case 0:
                     return;
