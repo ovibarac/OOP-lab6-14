@@ -9,11 +9,12 @@
 #include <string>
 #include <iostream>
 #include <ostream>
+#include "MyVector.h"
 
 using namespace std;
 
 class FilmRepo {
-    vector<Film> all;
+    MyVector<Film> all;
 
 public:
     FilmRepo() = default;
@@ -38,7 +39,7 @@ public:
     /*
      * Returneaza toate filmele
      */
-    const vector<Film>& getAll() const noexcept;
+    const MyVector<Film>& getAll() const noexcept;
 };
 
 class FilmRepoException{

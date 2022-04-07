@@ -18,7 +18,7 @@ class UI {
     /*
      * Printeaza lista de filme
      */
-    void tipareste(const vector<Film>& filme);
+    void tipareste(const MyVector<Film>& filme);
 
     /*
      * Cauta un film

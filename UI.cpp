@@ -5,6 +5,7 @@
 #include "UI.h"
 #include <iostream>
 #include <string>
+#include "MyVector.h"
 
 using std::cout;
 using std::cin;
@@ -43,17 +44,20 @@ void UI::addUI() {
 
 }
 
-void UI::tipareste(const vector<Film> &filme) {
+void UI::tipareste(const MyVector<Film> &filme) {
     /*
      * Printeaza lista de filme
      */
     cout<<"Filme: \n";
-    for(const auto& film : filme){
+
+    IteratorVectorT<Film> it = IteratorVectorT<Film>(filme, 0);
+    while(it.valid()){
+        auto& film = it.element();
         cout<<film.getTitlu()<<", "<<film.getGen()<<", "<<film.getAn()<<", "<<film.getActor()<<'\n';
+
+        it.next();
     }
     cout<<"\n";
-
-
 }
 
 void UI::findUI(){

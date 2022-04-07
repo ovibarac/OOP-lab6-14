@@ -20,7 +20,7 @@ public:
     /*
      * Returneaza toate filmele
      */
-    const vector<Film>& getAll() noexcept{
+    const MyVector<Film>& getAll() noexcept{
         return repo.getAll();
     }
 

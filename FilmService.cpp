@@ -91,9 +91,9 @@ void testModSrv(){
     srv.addFilm("b", "b", 1990, "c");
 
     srv.modFilm("b", "x", 2000,"y");
-    assert(srv.getAll()[1].getGen() == "x");
-    assert(srv.getAll()[1].getAn() == 2000);
-    assert(srv.getAll()[1].getActor() == "y");
+    assert(srv.getAll().get(1).getGen() == "x");
+    assert(srv.getAll().get(1).getAn() == 2000);
+    assert(srv.getAll().get(1).getActor() == "y");
 
 }
 

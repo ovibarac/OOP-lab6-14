@@ -15,6 +15,8 @@ class Film {
     int an;
     string actor;
 public:
+    Film() = default;
+
     Film(const string t, string g, int an, string a):titlu{t}, gen{g}, an{an}, actor{a}{}
 
     string getTitlu() const{
