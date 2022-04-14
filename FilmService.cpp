@@ -4,6 +4,7 @@
 
 #include "FilmService.h"
 #include <assert.h>
+#include <random>
 
 
 void FilmService::addFilm(const string& titlu, string gen, int an, string actor){
@@ -74,9 +75,7 @@ vector<Film> FilmService::filtrareAn(int an) {
     });
 }
 
-bool cmpTitlu(const Film& f1, const Film& f2){
-    return f1.getTitlu() > f2.getTitlu();
-}
+bool cmpTitlu(const Film& f1, const Film& f2){return f1.getTitlu() > f2.getTitlu();}
 
 vector<Film> FilmService::sortByTitlu(){
     /*
@@ -129,6 +128,17 @@ void FilmService::addCos(string titlu){
 
 void FilmService::golesteCos() {
     cos.goleste();
+}
+
+void FilmService::generateCos(int nrFilme) {
+    mt19937 mt{random_device{}()};
+    uniform_int_distribution<> dist(0, getAll().size()-1);
+
+    for(int i = 0; i< nrFilme; i++){
+        int random = dist(mt);
+        auto f = getAll()[random];
+        cos.add(f);
+    }
 }
 
 void testAddSrv(){
@@ -268,6 +278,9 @@ void testCos(){
 
     srv.golesteCos();
     assert(srv.cosSize() == 0);
+
+    srv.generateCos(5);
+    assert(srv.cosSize() == 5);
 }
 
 void testSrv(){

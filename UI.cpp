@@ -5,7 +5,10 @@
 #include "UI.h"
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <vector>
+#include <stdio.h>
+#include <stdlib.h>
 
 using std::cout;
 using std::cin;
@@ -160,9 +163,23 @@ void UI::cosUI() {
         srv.golesteCos();
         cout<<"Cos golit \n";
     }else if(cmd == 3){
+        int nrFilme;
+        cout<<"Numarul de filme: ";
+        cin>>nrFilme;
+        srv.generateCos(nrFilme);
 
+        tipareste(srv.allCos());
     }else if(cmd == 4){
+        string fisier;
+        cout<<"Nume fisier CVS sau HTML: ";
+        cin>>fisier;
+        ofstream file(fisier);
+        for(auto& film : srv.allCos()){
+            string out = film.getTitlu() + ", " + film.getGen() + ", " + to_string(film.getAn()) + ", " + film.getActor()+ '\n';
+            file<<out;
+        }
 
+        file.close();
     }else if(cmd == 5){
         tipareste(srv.allCos());
     }
@@ -214,6 +231,7 @@ void UI::run() {
                     break;
                 case 8:
                     cosUI();
+                    break;
                 case 0:
                     return;
                 default:
@@ -227,5 +245,7 @@ void UI::run() {
         catch(const ValidateException& ex){
             cout<<ex<<'\n';
         }
+
+        cout<<"Numarul filmelor din cos: "<<srv.cosSize()<<"\n";
     }
 }

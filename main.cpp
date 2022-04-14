@@ -3,6 +3,7 @@
 #include "Validator.h"
 #include "FilmService.h"
 #include "UI.h"
+#include "Cos.h"
 
 void testAll(){
     testeRepo();

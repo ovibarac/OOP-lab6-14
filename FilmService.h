@@ -93,6 +93,8 @@ public:
         return cos.size();
     }
 
+    void generateCos(int nrFilme);
+
 };
 void testSrv();
 

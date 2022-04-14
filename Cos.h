@@ -12,7 +12,7 @@ private:
     vector<Film> all;
 
 public:
-    Cos() = default;
+    Cos();
 
     vector<Film>& getAll(){
         return all;
