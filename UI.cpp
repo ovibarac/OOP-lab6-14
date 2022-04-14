@@ -5,7 +5,7 @@
 #include "UI.h"
 #include <iostream>
 #include <string>
-#include "MyVector.h"
+#include <vector>
 
 using std::cout;
 using std::cin;
@@ -44,18 +44,13 @@ void UI::addUI() {
 
 }
 
-void UI::tipareste(const MyVector<Film> &filme) {
+void UI::tipareste(const vector<Film> &filme) {
     /*
      * Printeaza lista de filme
      */
     cout<<"Filme: \n";
-
-    IteratorVectorT<Film> it = IteratorVectorT<Film>(filme, 0);
-    while(it.valid()){
-        auto& film = it.element();
+    for(auto& film : filme){
         cout<<film.getTitlu()<<", "<<film.getGen()<<", "<<film.getAn()<<", "<<film.getActor()<<'\n';
-
-        it.next();
     }
     cout<<"\n";
 }
@@ -151,6 +146,28 @@ void UI::sortUI() {
     }
 }
 
+void UI::cosUI() {
+    int cmd;
+    cout<<"1.Adaugare in cos\n2.Goleste cos\n3.Genereaza cos\n4.Export cos\n5.Afiseaza cos\n";
+    cin>>cmd;
+    if(cmd == 1){
+        string titlu;
+        cout<<"Tiltu: \n";
+        cin>>titlu;
+
+        srv.addCos(titlu);
+    }else if(cmd == 2){
+        srv.golesteCos();
+        cout<<"Cos golit \n";
+    }else if(cmd == 3){
+
+    }else if(cmd == 4){
+
+    }else if(cmd == 5){
+        tipareste(srv.allCos());
+    }
+}
+
 void UI::generate(){
     /*
      * Populeaza lista de filme
@@ -169,7 +186,7 @@ void UI::run() {
      * Ruleaza aplicatia
      */
     while(true){
-        cout<<"1.Adauga\n2.Tipareste\n3.Cauta\n4.Modifica\n5.Sterge\n6.Filtreaza\n7.Sort\n0. Exit\n";
+        cout<<"1.Adauga\n2.Tipareste\n3.Cauta\n4.Modifica\n5.Sterge\n6.Filtreaza\n7.Sort\n8.Cos\n0. Exit\n";
         int cmd;
         cin>>cmd;
         try{
@@ -195,6 +212,8 @@ void UI::run() {
                 case 7:
                     sortUI();
                     break;
+                case 8:
+                    cosUI();
                 case 0:
                     return;
                 default:

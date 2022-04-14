@@ -4,7 +4,6 @@
 
 #include "FilmService.h"
 #include <assert.h>
-#include "MyVector.h"
 
 
 void FilmService::addFilm(const string& titlu, string gen, int an, string actor){
@@ -43,23 +42,21 @@ void FilmService::deleteFilm(string titlu) {
     repo.deleteFilm(titlu);
 }
 
-MyVector<Film> FilmService::filtreaza(function<bool(const Film&)> fct){
+vector<Film> FilmService::filtreaza(function<bool(const Film&)> fct){
     /*
      * Filtreaza dupa un criteriu
      * fct: functia relatie
      */
-    MyVector<Film> rez;
-    IteratorVectorT<Film> it = IteratorVectorT<Film>(getAll(), 0);
-    while(it.valid()){
-        if(fct(it.element())){
-            rez.add(it.element());
+    vector<Film> rez;
+    for(auto& f : repo.getAll()){
+        if(fct(f)){
+            rez.push_back(f);
         }
-        it.next();
     }
     return rez;
 }
 
-MyVector<Film> FilmService::filtrareTitlu(string titlu) {
+vector<Film> FilmService::filtrareTitlu(string titlu) {
     /*
      * Filtrare dupa titlu
      */
@@ -68,7 +65,7 @@ MyVector<Film> FilmService::filtrareTitlu(string titlu) {
     });
 }
 
-MyVector<Film> FilmService::filtrareAn(int an) {
+vector<Film> FilmService::filtrareAn(int an) {
     /*
      * Filtrare dupa an aparitie
      */
@@ -81,48 +78,57 @@ bool cmpTitlu(const Film& f1, const Film& f2){
     return f1.getTitlu() > f2.getTitlu();
 }
 
-MyVector<Film> FilmService::sortByTitlu(){
+vector<Film> FilmService::sortByTitlu(){
     /*
      * Sorteaza dupa titlu
      */
-    MyVector<Film> rez = getAll();
-    rez.generalSort([](const Film& f1, const Film& f2){
+    vector<Film> rez = getAll();
+    generalSort(rez, [](const Film& f1, const Film& f2){
         return f1.getTitlu() < f2.getTitlu();
     });
     return rez;
 }
 
-MyVector<Film> FilmService::sortByActor(){
+vector<Film> FilmService::sortByActor(){
     /*
      * Sorteaza dupa actor
      */
-    MyVector<Film> rez = getAll();
-    rez.generalSort([](const Film& f1, const Film& f2){
+    vector<Film> rez = getAll();
+    generalSort(rez, [](const Film& f1, const Film& f2){
         return f1.getActor() < f2.getActor();
     });
     return rez;
 }
 
-MyVector<Film> FilmService::sortByGen(){
+vector<Film> FilmService::sortByGen(){
     /*
      * Sorteaza dupa actor
      */
-    MyVector<Film> rez = getAll();
-    rez.generalSort([](const Film& f1, const Film& f2){
+    vector<Film> rez = getAll();
+    generalSort(rez, [](const Film& f1, const Film& f2){
         return f1.getGen() > f2.getGen();
     });
     return rez;
 }
 
-MyVector<Film> FilmService::sortByAn(MyVector<Film> rez){
+vector<Film> FilmService::sortByAn(vector<Film> rez){
     /*
      * Sorteaza dupa actor
      */
 
-    rez.generalSort([](const Film& f1, const Film& f2){
+    generalSort(rez, [](const Film& f1, const Film& f2){
         return f1.getAn() < f2.getAn();
     });
     return rez;
+}
+
+void FilmService::addCos(string titlu){
+    auto f = repo.find(titlu);
+    cos.add(f);
+}
+
+void FilmService::golesteCos() {
+    cos.goleste();
 }
 
 void testAddSrv(){
@@ -131,7 +137,8 @@ void testAddSrv(){
      */
     FilmRepo repo;
     Validator val;
-    FilmService s {repo, val};
+    Cos cos;
+    FilmService s {repo, val, cos};
     s.addFilm("a", "b", 1900, "a");
     s.addFilm("b", "b", 1900, "a");
     s.addFilm("c", "b", 1900, "a");
@@ -163,7 +170,8 @@ void testAddSrv(){
 void testFindSrv(){
     FilmRepo repo;
     Validator val;
-    FilmService srv {repo, val};
+    Cos cos;
+    FilmService srv {repo, val, cos};
     srv.addFilm("a", "b", 1990, "c");
     srv.addFilm("b", "b", 1990, "c");
 
@@ -182,32 +190,35 @@ void testFindSrv(){
 void testModSrv() {
     FilmRepo repo;
     Validator val;
-    FilmService srv{repo, val};
+    Cos cos;
+    FilmService srv{repo, val, cos};
     srv.addFilm("a", "b", 1990, "c");
     srv.addFilm("b", "b", 1990, "c");
 
     srv.modFilm("b", "x", 2000, "y");
-    assert(srv.getAll().get(1).getGen() == "x");
-    assert(srv.getAll().get(1).getAn() == 2000);
-    assert(srv.getAll().get(1).getActor() == "y");
+    assert(srv.getAll()[1].getGen() == "x");
+    assert(srv.getAll()[1].getAn() == 2000);
+    assert(srv.getAll()[1].getActor() == "y");
 
 }
 
 void testDeleteSrv(){
     FilmRepo repo;
     Validator val;
-    FilmService srv{repo, val};
+    Cos cos;
+    FilmService srv{repo, val, cos};
     srv.addFilm("a", "b", 1990, "c");
     srv.addFilm("b", "b", 1990, "c");
     srv.deleteFilm("a");
     assert(srv.getAll().size()==1);
-    assert(srv.getAll().get(0).getTitlu()=="b");
+    assert(srv.getAll()[0].getTitlu()=="b");
 }
 
 void testFiltrare(){
     FilmRepo repo;
     Validator val;
-    FilmService srv{repo, val};
+    Cos cos;
+    FilmService srv{repo, val, cos};
     srv.addFilm("a", "a", 2000, "a");
     srv.addFilm("b", "a", 2000, "a");
     srv.addFilm("c", "a", 1990, "a");
@@ -220,13 +231,43 @@ void testFiltrare(){
 void testSort(){
     FilmRepo repo;
     Validator val;
-    FilmService srv{repo, val};
+    Cos cos;
+    FilmService srv{repo, val, cos};
     srv.addFilm("a", "a", 2000, "a");
     srv.addFilm("b", "c", 2000, "x");
     srv.addFilm("c", "g", 1990, "b");
-    assert(srv.sortByTitlu().get(0).getTitlu() == "a");
-    assert(srv.sortByActor().get(0).getActor() == "a");
-    assert(srv.sortByAn(srv.sortByGen()).get(0).getAn() == 1990);
+    assert(srv.sortByTitlu()[0].getTitlu() == "a");
+    assert(srv.sortByActor()[0].getActor() == "a");
+    assert(srv.sortByAn(srv.sortByGen())[0].getAn() == 1990);
+}
+
+void testCos(){
+    FilmRepo repo;
+    Validator val;
+    Cos cos;
+    FilmService srv{repo, val, cos};
+    srv.addFilm("a", "a", 2000, "a");
+    srv.addFilm("b", "c", 2000, "x");
+    srv.addFilm("c", "g", 1990, "b");
+
+    assert(srv.cosSize() == 0);
+    srv.addCos("a");
+    assert(srv.cosSize() == 1);
+    srv.addCos("b");
+    assert(srv.cosSize() == 2);
+    srv.addCos("c");
+    assert(srv.cosSize() == 3);
+    assert(srv.allCos()[0].getTitlu() == "a");
+
+    try{
+        srv.addCos("d");
+        assert(false);
+    }catch (FilmRepoException){
+        assert(true);
+    }
+
+    srv.golesteCos();
+    assert(srv.cosSize() == 0);
 }
 
 void testSrv(){
@@ -236,4 +277,5 @@ void testSrv(){
     testFiltrare();
     testSort();
     testDeleteSrv();
+    testCos();
 }

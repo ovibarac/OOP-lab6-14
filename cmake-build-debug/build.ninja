@@ -108,6 +108,12 @@ build CMakeFiles/lab6_7.dir/UI.cpp.o: CXX_COMPILER__lab6_7_Debug /home/ovi/work/
   OBJECT_DIR = CMakeFiles/lab6_7.dir
   OBJECT_FILE_DIR = CMakeFiles/lab6_7.dir
 
+build CMakeFiles/lab6_7.dir/Cos.cpp.o: CXX_COMPILER__lab6_7_Debug /home/ovi/work/oop/CLionProjects/lab6-7/Cos.cpp || cmake_object_order_depends_target_lab6_7
+  DEP_FILE = CMakeFiles/lab6_7.dir/Cos.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles/lab6_7.dir
+  OBJECT_FILE_DIR = CMakeFiles/lab6_7.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target lab6_7
@@ -116,7 +122,7 @@ build CMakeFiles/lab6_7.dir/UI.cpp.o: CXX_COMPILER__lab6_7_Debug /home/ovi/work/
 #############################################
 # Link the executable lab6_7
 
-build lab6_7: CXX_EXECUTABLE_LINKER__lab6_7_Debug CMakeFiles/lab6_7.dir/main.cpp.o CMakeFiles/lab6_7.dir/Film.cpp.o CMakeFiles/lab6_7.dir/FilmRepo.cpp.o CMakeFiles/lab6_7.dir/FilmService.cpp.o CMakeFiles/lab6_7.dir/Validator.cpp.o CMakeFiles/lab6_7.dir/UI.cpp.o
+build lab6_7: CXX_EXECUTABLE_LINKER__lab6_7_Debug CMakeFiles/lab6_7.dir/main.cpp.o CMakeFiles/lab6_7.dir/Film.cpp.o CMakeFiles/lab6_7.dir/FilmRepo.cpp.o CMakeFiles/lab6_7.dir/FilmService.cpp.o CMakeFiles/lab6_7.dir/Validator.cpp.o CMakeFiles/lab6_7.dir/UI.cpp.o CMakeFiles/lab6_7.dir/Cos.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/lab6_7.dir
   POST_BUILD = :

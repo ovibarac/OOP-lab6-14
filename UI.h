@@ -18,7 +18,7 @@ class UI {
     /*
      * Printeaza lista de filme
      */
-    void tipareste(const MyVector<Film>& filme);
+    void tipareste(const vector<Film>& filme);
 
     /*
      * Cauta un film
@@ -38,6 +38,8 @@ class UI {
     void filterUI();
 
     void sortUI();
+
+    void cosUI();
 
 public:
     UI(FilmService& s): srv{s}{}

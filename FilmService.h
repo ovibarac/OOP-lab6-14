@@ -10,18 +10,32 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include "Cos.h"
 
 class FilmService {
     FilmRepo &repo;
     Validator &val;
+    Cos &cos;
 
+
+    void generalSort(vector<Film>& v, bool(*maimicF)(const Film&, const Film&)){
+        for(int i = 0; i< v.size(); i++){
+            for(int j = i+1; j<v.size(); j++){
+                if(!maimicF(v[i], v[j])){
+                    Film aux = v[i];
+                    v[i] = v[j];
+                    v[j] = aux;
+                }
+            }
+        }
+    }
 public:
-    FilmService(FilmRepo &repo, Validator &val) : repo{repo}, val{val} {}
+    FilmService(FilmRepo &repo, Validator &val, Cos &cos) : repo{repo}, val{val}, cos{cos} {}
 
     /*
      * Returneaza toate filmele
      */
-    const MyVector<Film> &getAll() noexcept {
+    const vector<Film> &getAll() noexcept {
         return repo.getAll();
     }
 
@@ -53,22 +67,34 @@ public:
     /*
      * Filtrare
      */
-    MyVector<Film> filtreaza(function<bool(const Film &)> fct);
+    vector<Film> filtreaza(function<bool(const Film &)> fct);
 
-    MyVector<Film> filtrareTitlu(string titlu);
+    vector<Film> filtrareTitlu(string titlu);
 
-    MyVector<Film> filtrareAn(int an);
+    vector<Film> filtrareAn(int an);
 
-    MyVector<Film> sortByTitlu();
+    vector<Film> sortByTitlu();
 
-    MyVector<Film> sortByActor();
+    vector<Film> sortByActor();
 
-    MyVector<Film> sortByGen();
+    vector<Film> sortByGen();
 
-    MyVector<Film> sortByAn(MyVector<Film> rez);
+    vector<Film> sortByAn(vector<Film> rez);
 
-    };
-    void testSrv();
+    void addCos(string titlu);
+
+    void golesteCos();
+
+    vector<Film> allCos(){
+        return cos.getAll();
+    }
+
+    int cosSize(){
+        return cos.size();
+    }
+
+};
+void testSrv();
 
 
 #endif //LAB6_7_FILMSERVICE_H

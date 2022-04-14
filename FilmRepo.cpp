@@ -9,11 +9,17 @@ void FilmRepo::store(const Film &film) {
     if(exist(film)){
         throw FilmRepoException("Exista deja filmul: " + film.getTitlu());
     }
-    all.add(film);
+    all.push_back(film);
 }
 
 void FilmRepo::deleteFilm(string titlu){
-    all.deleteFilm(titlu);
+    vector<Film> rez;
+    for(auto f : all){
+        if(f.getTitlu() != titlu){
+            rez.push_back(f);
+        }
+    }
+    all = rez;
 }
 
 bool FilmRepo::exist(const Film &film) const {
@@ -34,18 +40,16 @@ const Film& FilmRepo::find(string titlu) const{
      * Cauta filmul cu titlul dat
      * arunca exceptie daca nu exista
      */
-    IteratorVectorT<Film> it = IteratorVectorT<Film>(all, 0);
-    while(it.valid()){
-        if(it.element().getTitlu() == titlu){
-            return it.element();
+    for(auto& f : all){
+        if(f.getTitlu() == titlu){
+            return f;
         }
-        it.next();
     }
 
     throw FilmRepoException("Nu exista filmul: " + titlu);
 }
 
-const MyVector<Film>& FilmRepo::getAll()const noexcept{
+const vector<Film>& FilmRepo::getAll()const noexcept{
     /*
      * Returneaza toate filmele
      */

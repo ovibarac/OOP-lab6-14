@@ -12,7 +12,8 @@ void testAll(){
 void start(){
     FilmRepo repo;
     Validator val;
-    FilmService srv{repo, val};
+    Cos cos;
+    FilmService srv{repo, val, cos};
     UI ui{srv};
     ui.generate();
     ui.run();
