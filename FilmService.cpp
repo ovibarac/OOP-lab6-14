@@ -5,6 +5,8 @@
 #include "FilmService.h"
 #include <assert.h>
 #include <random>
+#include <vector>
+#include <algorithm>
 
 
 void FilmService::addFilm(const string& titlu, string gen, int an, string actor){
@@ -61,9 +63,14 @@ vector<Film> FilmService::filtrareTitlu(string titlu) {
     /*
      * Filtrare dupa titlu
      */
-    return filtreaza([titlu](const Film& f){
+//    return filtreaza([titlu](const Film& f){
+//        return f.getTitlu() == titlu;
+//    });
+    vector<Film> rez;
+    copy_if(getAll().begin(), getAll().end(), back_inserter(rez), [titlu](const Film& f){
         return f.getTitlu() == titlu;
     });
+    return rez;
 }
 
 vector<Film> FilmService::filtrareAn(int an) {
@@ -140,6 +147,11 @@ void FilmService::generateCos(int nrFilme) {
         cos.add(f);
     }
 }
+
+bool FilmService::anyOfGen(string gen){
+    return any_of(getAll().begin(), getAll().end(), [gen](const Film& f){return f.getGen()==gen;});
+}
+
 
 void testAddSrv(){
     /*
@@ -283,6 +295,20 @@ void testCos(){
     assert(srv.cosSize() == 5);
 }
 
+void testAnyOf(){
+    FilmRepo repo;
+    Validator val;
+    Cos cos;
+    FilmService srv{repo, val, cos};
+    srv.addFilm("a", "a", 2000, "a");
+    srv.addFilm("b", "c", 2000, "x");
+    srv.addFilm("c", "g", 1990, "b");
+
+    assert(srv.anyOfGen("a") == true);
+    assert(srv.anyOfGen("d") == false);
+
+}
+
 void testSrv(){
     testAddSrv();
     testFindSrv();
@@ -291,4 +317,5 @@ void testSrv(){
     testSort();
     testDeleteSrv();
     testCos();
+    testAnyOf();
 }

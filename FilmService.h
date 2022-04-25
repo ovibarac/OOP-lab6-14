@@ -95,6 +95,8 @@ public:
 
     void generateCos(int nrFilme);
 
+    bool anyOfGen(string gen);
+
 };
 void testSrv();
 

@@ -185,6 +185,17 @@ void UI::cosUI() {
     }
 }
 
+void UI::anyOf(){
+    string gen;
+    cout<<"Gen: ";
+    cin>>gen;
+    if(srv.anyOfGen(gen)){
+        cout<<"Exista filme cu genul " << gen<<'\n';
+    }else{
+        cout<<"Nu exista filme cu genul " << gen<<'\n';
+    }
+}
+
 void UI::generate(){
     /*
      * Populeaza lista de filme
@@ -203,7 +214,7 @@ void UI::run() {
      * Ruleaza aplicatia
      */
     while(true){
-        cout<<"1.Adauga\n2.Tipareste\n3.Cauta\n4.Modifica\n5.Sterge\n6.Filtreaza\n7.Sort\n8.Cos\n0. Exit\n";
+        cout<<"1.Adauga\n2.Tipareste\n3.Cauta\n4.Modifica\n5.Sterge\n6.Filtreaza\n7.Sort\n8.Cos\n9.Any of gen\n0. Exit\n";
         int cmd;
         cin>>cmd;
         try{
@@ -231,6 +242,9 @@ void UI::run() {
                     break;
                 case 8:
                     cosUI();
+                    break;
+                case 9:
+                    anyOf();
                     break;
                 case 0:
                     return;

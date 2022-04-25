@@ -41,6 +41,8 @@ class UI {
 
     void cosUI();
 
+    void anyOf();
+
 public:
     UI(FilmService& s): srv{s}{}
 
