@@ -11,12 +11,14 @@
 #include <vector>
 #include <functional>
 #include "Cos.h"
+#include "Undo.h"
 
 class FilmService {
     FilmRepo &repo;
     Validator &val;
     Cos &cos;
 
+    vector<ActiuneUndo*> undoActions;
 
     void generalSort(vector<Film>& v, bool(*maimicF)(const Film&, const Film&)){
         for(int i = 0; i< v.size(); i++){
@@ -63,6 +65,8 @@ public:
      * Sterge un film
      */
     void deleteFilm(string titlu);
+
+    void undo();
 
     /*
      * Filtrare

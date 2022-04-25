@@ -17,6 +17,7 @@ void FilmService::addFilm(const string& titlu, string gen, int an, string actor)
     Film f{titlu, gen, an, actor};
     val.validate(f);
     repo.store(f);
+    undoActions.push_back(new UndoAdd(repo, f));
 }
 
 const Film& FilmService::find(const string& titlu){
@@ -36,13 +37,29 @@ void FilmService::modFilm(const string& titlu, string new_gen, int new_an, strin
     */
     Film& film = const_cast<Film &>(find(titlu));
     val.validate(Film {titlu, new_gen, new_an, new_actor});
+    Film filmInit = film;           /////////////////////////////////
+
     film.setGen(new_gen);
     film.setAn(new_an);
     film.setActor(new_actor);
+    undoActions.push_back(new UndoMod(repo, filmInit, film));
 }
 
 void FilmService::deleteFilm(string titlu) {
+    auto film = find(titlu);
     repo.deleteFilm(titlu);
+    undoActions.push_back(new UndoDelete(repo, film));
+}
+
+void FilmService::undo() {
+    if(undoActions.empty()){
+        throw FilmRepoException("Nu mai exista operatii");
+    }
+
+    auto act = undoActions.back();
+    act->doUndo();
+    undoActions.pop_back();
+    delete act;
 }
 
 vector<Film> FilmService::filtreaza(function<bool(const Film&)> fct){
@@ -81,8 +98,6 @@ vector<Film> FilmService::filtrareAn(int an) {
         return f.getAn() == an;
     });
 }
-
-bool cmpTitlu(const Film& f1, const Film& f2){return f1.getTitlu() > f2.getTitlu();}
 
 vector<Film> FilmService::sortByTitlu(){
     /*
@@ -282,8 +297,7 @@ void testCos(){
     assert(srv.allCos()[0].getTitlu() == "a");
 
     try{
-        srv.addCos("d");
-        assert(false);
+        srv.addCos("d"); assert(false);
     }catch (FilmRepoException){
         assert(true);
     }
@@ -309,6 +323,27 @@ void testAnyOf(){
 
 }
 
+void testUndo(){
+    FilmRepo repo;
+    Validator val;
+    Cos cos;
+    FilmService srv{repo, val, cos};
+    srv.addFilm("a", "a", 2000, "a");
+    srv.modFilm("a", "b", 2005, "b");
+    srv.deleteFilm("a");
+
+    try{srv.undo();} catch(...){assert(false);}
+    assert(srv.getAll().size()==1);
+
+    try{srv.undo();} catch(...){assert(false);}
+    assert(srv.getAll()[0].getGen()=="a");
+
+    try{srv.undo();} catch(...){assert(false);}
+    assert(srv.getAll().size()==0);
+
+    try{srv.undo();assert(false);} catch(const FilmRepoException& ex){assert(true);}
+}
+
 void testSrv(){
     testAddSrv();
     testFindSrv();
@@ -318,4 +353,5 @@ void testSrv(){
     testDeleteSrv();
     testCos();
     testAnyOf();
+    testUndo();
 }

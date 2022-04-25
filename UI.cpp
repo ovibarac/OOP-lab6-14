@@ -196,6 +196,12 @@ void UI::anyOf(){
     }
 }
 
+void UI::undoUI(){
+    srv.undo();
+    cout<<"Undo efectuat cu succes\n";
+    tipareste(srv.getAll());
+}
+
 void UI::generate(){
     /*
      * Populeaza lista de filme
@@ -214,7 +220,7 @@ void UI::run() {
      * Ruleaza aplicatia
      */
     while(true){
-        cout<<"1.Adauga\n2.Tipareste\n3.Cauta\n4.Modifica\n5.Sterge\n6.Filtreaza\n7.Sort\n8.Cos\n9.Any of gen\n0. Exit\n";
+        cout<<"1.Adauga\n2.Tipareste\n3.Cauta\n4.Modifica\n5.Sterge\n6.Filtreaza\n7.Sort\n8.Cos\n9.Any of gen\n10.Undo\n0. Exit\n";
         int cmd;
         cin>>cmd;
         try{
@@ -245,6 +251,9 @@ void UI::run() {
                     break;
                 case 9:
                     anyOf();
+                    break;
+                case 10:
+                    undoUI();
                     break;
                 case 0:
                     return;

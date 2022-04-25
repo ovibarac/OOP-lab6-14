@@ -43,6 +43,8 @@ class UI {
 
     void anyOf();
 
+    void undoUI();
+
 public:
     UI(FilmService& s): srv{s}{}
 
