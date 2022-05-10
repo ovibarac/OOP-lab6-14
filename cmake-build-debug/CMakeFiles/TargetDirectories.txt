@@ -1,0 +1,5 @@
+/home/ovi/work/oop/qtlab10/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/ovi/work/oop/qtlab10/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ovi/work/oop/qtlab10/cmake-build-debug/CMakeFiles/qtlab10.dir
+/home/ovi/work/oop/qtlab10/cmake-build-debug/CMakeFiles/qtlab10_autogen_timestamp_deps.dir
+/home/ovi/work/oop/qtlab10/cmake-build-debug/CMakeFiles/qtlab10_autogen.dir
