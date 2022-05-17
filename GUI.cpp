@@ -32,6 +32,52 @@ void GUI::reloadFilme(vector<Film> filme){
     }
 }
 
+void GUI::genuriList(){
+    genuri.clear();
+    for(auto& f: srv.getAll()){
+        bool exista = false;
+        for(auto g : genuri){
+            if(g == f.getGen()){
+                exista = true;
+            }
+        }
+        if(!exista){
+            genuri.push_back(f.getGen());
+        }
+    }
+}
+
+void GUI::refreshBtns(){
+    if(lyBtnDinamice != NULL){
+        QLayoutItem* item;
+        while((item = lyBtnDinamice->takeAt(0)) != NULL){
+            delete item->widget();
+            delete item;
+        }
+        delete lyBtnDinamice;
+    }
+//    delete lyBtnDinamice;
+    delete subTabelBox;
+    lyBtnDinamice = new QVBoxLayout;
+    subTabelBox = new QGroupBox;
+    subTabelBox->setLayout(lyBtnDinamice);
+    lyMain->addWidget(subTabelBox);
+
+    for(auto g : genuri){
+        QPushButton* btnGenCrt = new QPushButton(QString::fromStdString(g));
+        btnDinamice.push_back(btnGenCrt);
+        QObject::connect(btnGenCrt, &QPushButton::clicked, [&, g](){
+            int nr = this->srv.filtrareGen(g).size();
+            string nr_str = to_string(nr);
+            QMessageBox::information(this, "Info", QString::fromStdString(nr_str));
+
+        });
+        lyBtnDinamice->addWidget(btnGenCrt);
+    }
+
+
+}
+
 void GUI::addUI() {
     /*
     * Citeste datele de la tastatura si adauga un film
@@ -51,7 +97,16 @@ void GUI::addUI() {
 
         this->srv.addFilm(titlu, gen, an, actor);
         this->reloadFilme(srv.getAll());
-
+        bool exista = false;
+        for(auto g:genuri){
+            if(g == gen){
+                exista  = true;
+            }
+        }
+        if(!exista){
+            genuri.push_back(gen);
+            refreshBtns();
+        }
         QMessageBox::information(this, "Info", QString::fromStdString("Film adaugat cu succes"));
 
     }
@@ -119,7 +174,8 @@ void GUI::modUI() {
 
         this->srv.modFilm(titlu, gen, an, actor);
         this->reloadFilme(srv.getAll());
-
+        genuriList();
+        refreshBtns();
         QMessageBox::information(this, "Info", QString::fromStdString("Film modificat cu succes"));
 
     }
@@ -144,8 +200,15 @@ void GUI::deleteUI() {
         editAn->clear();
         editActor->clear();
 
+        auto f = srv.find(titlu);
+        string genSters = f.getGen();
         srv.deleteFilm(titlu);
+        genuriList();
+        refreshBtns();
+
         reloadFilme(srv.getAll());
+
+
         QMessageBox::information(this, "Info", QString::fromStdString("Film sters cu succes"));
     }catch (const FilmRepoException& ex){
         QMessageBox::warning(this, "Warning", QString::fromStdString(ex.getMsg()));
@@ -153,74 +216,138 @@ void GUI::deleteUI() {
 }
 
 void GUI::filterUI() {
-    string titlu;
-    string an_str;
-    int cmd;
-    cout<<"1.Filtrare titlu\n2.Filtrare anul aparitiei\n";
-    cin>>cmd;
-    if(cmd==1){
-        cout<<"Tiltu: \n";
-        cin>>titlu;
-        tipareste(srv.filtrareTitlu(titlu));
-    }else if(cmd==2){
-        cout<<"Anul aparitiei: \n";
-        cin>>an_str;
+    if(radioFilterTitlu->isChecked()){
+        string titlu = editFilter->text().toStdString();
+        reloadFilme(srv.filtrareTitlu(titlu));
+    }else if(radioFilterAn->isChecked()){
         try{
-            int an = stoi(an_str);
-            tipareste(srv.filtrareAn(an));
+            int an = editFilter->text().toInt();
+            reloadFilme(srv.filtrareAn(an));
         }catch(...){
-            cout<<"An invalid\n";
+            QMessageBox::warning(this, "Warning", QString::fromStdString("An invalid"));
         }
     }
 }
 
 void GUI::sortUI() {
-    int cmd;
-    cout<<"Sortare dupa:\n1.Titlu\n2.Actor principal\n3.Anul aparitiei + gen\n";
-    cin>>cmd;
-    if(cmd == 1){
-        tipareste(srv.sortByTitlu());
-    }else if(cmd == 2){
-        tipareste(srv.sortByActor());
-    }else if(cmd == 3){
-        tipareste(srv.sortByAn(srv.sortByGen()));
+    if(radioSrtTitlu->isChecked()){
+        reloadFilme(srv.sortByTitlu());
+    }else if(radioSrtActor->isChecked()){
+        reloadFilme(srv.sortByActor());
+    }else if(radioSrtAnGen->isChecked()){
+        reloadFilme(srv.sortByAn(srv.sortByGen()));
+    }
+}
+
+void GUI::reloadCos(vector<Film> filme) {
+    //reincarca tabelul
+//    this->tableCos->clearContents();
+//    this->tableCos->setRowCount(filme.size());
+//
+//    int lineNumber = 0;
+//    for(auto& f : filme){
+//        this->tableCos->setItem(lineNumber, 0, new QTableWidgetItem(QString::fromStdString(f.getTitlu())));
+//        this->tableCos->setItem(lineNumber, 1, new QTableWidgetItem(QString::fromStdString(f.getGen())));
+//        this->tableCos->setItem(lineNumber, 2, new QTableWidgetItem(QString::number(f.getAn())));
+//        this->tableCos->setItem(lineNumber, 3, new QTableWidgetItem(QString::fromStdString(f.getActor())));
+//        lineNumber++;
+//    }
+//
+    this->qlistCos->clear();
+    for(auto& f : filme){
+        string linie = f.getTitlu() + " " + f.getGen() + " " + to_string(f.getAn()) + " " + f.getActor();
+        qlistCos->addItem(QString::fromStdString(linie));
     }
 }
 
 void GUI::cosUI() {
-    int cmd;
-    cout<<"1.Adaugare in cos\n2.Goleste cos\n3.Genereaza cos\n4.Export cos\n5.Afiseaza cos\n";
-    cin>>cmd;
-    if(cmd == 1){
-        string titlu;
-        cout<<"Tiltu: \n";
-        cin>>titlu;
+    QWidget* cosWindow = new QWidget;
+    cosWindow->show();
+    QHBoxLayout* lyMainCos = new QHBoxLayout;
+    cosWindow->setLayout(lyMainCos);
+    QPushButton* btnAddCos = new QPushButton("Adauga");
+    QPushButton* btnEmptyCos = new QPushButton("Goleste cos");
+    QPushButton* btnGenCos = new QPushButton("Genereaza cos");
+    QPushButton* btnExportCos = new QPushButton("Export cos");
 
-        srv.addCos(titlu);
-    }else if(cmd == 2){
+    //stanga
+    QWidget* drCos = new QWidget;
+    QVBoxLayout* lyDrCos = new QVBoxLayout;
+    drCos->setLayout(lyDrCos);
+    int lines = 10;
+    int cols = 4;
+//    tableCos = new QTableWidget(lines, cols);
+    qlistCos = new QListWidget();
+//    QStringList tableHeaderCos;
+//    tableHeaderCos << "Titlu" << "Gen" << "An" << "Actor principal";
+//    tableCos->setHorizontalHeaderLabels(tableHeaderCos);
+//    tableCos->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+//    lyDrCos->addWidget(tableCos);
+    lyDrCos->addWidget(qlistCos);
+
+    //dreapta
+    QWidget* stCos = new QWidget;
+    QVBoxLayout* lyStCos = new QVBoxLayout;
+    stCos->setLayout(lyStCos);
+
+    QLineEdit* editTitluCos = new QLineEdit;
+    QHBoxLayout* lyAddCos = new QHBoxLayout;
+    QWidget* liniaAddCos = new QWidget;
+    liniaAddCos->setLayout(lyAddCos);
+    lyAddCos->addWidget(editTitluCos);
+    lyAddCos->addWidget(btnAddCos);
+
+    QLineEdit* editGenerate = new QLineEdit;
+    QHBoxLayout* lyGenCos = new QHBoxLayout;
+    QWidget* liniaGenCos = new QWidget;
+    liniaGenCos->setLayout(lyGenCos);
+    lyGenCos->addWidget(editGenerate);
+    lyGenCos->addWidget(btnGenCos);
+
+    QLineEdit* editExport = new QLineEdit;
+    QHBoxLayout* lyExCos = new QHBoxLayout;
+    QWidget* liniaExCos = new QWidget;
+    liniaExCos->setLayout(lyExCos);
+    lyExCos->addWidget(editExport);
+    lyExCos->addWidget(btnExportCos);
+
+    lyStCos->addWidget(liniaAddCos);
+    lyStCos->addWidget(btnEmptyCos);
+    lyStCos->addWidget(liniaGenCos);
+    lyStCos->addWidget(liniaExCos);
+
+    //main layout (is invers)
+    lyMainCos->addWidget(drCos);
+    lyMainCos->addWidget(stCos);
+
+    QObject::connect(btnAddCos, &QPushButton::clicked, [&, editTitluCos](){
+        string text = editTitluCos->text().toStdString();
+        srv.addCos(text);
+        reloadCos(srv.allCos());
+    });
+
+    QObject::connect(btnEmptyCos, &QPushButton::clicked, [&](){
         srv.golesteCos();
-        cout<<"Cos golit \n";
-    }else if(cmd == 3){
-        int nrFilme;
-        cout<<"Numarul de filme: ";
-        cin>>nrFilme;
-        srv.generateCos(nrFilme);
+        reloadCos(srv.allCos());
+    });
 
-        tipareste(srv.allCos());
-    }else if(cmd == 4){
-        string fisier;
-        cout<<"Nume fisier CVS sau HTML: ";
-        cin>>fisier;
+    QObject::connect(btnGenCos, &QPushButton::clicked, [&, editGenerate](){
+        int nr = editGenerate->text().toInt();
+        srv.generateCos(nr);
+        reloadCos(srv.allCos());
+    });
+
+    QObject::connect(btnExportCos, &QPushButton::clicked, [&, editExport](){
+        string fisier = editExport->text().toStdString();
         ofstream file(fisier);
         for(auto& film : srv.allCos()){
             string out = film.getTitlu() + ", " + film.getGen() + ", " + to_string(film.getAn()) + ", " + film.getActor()+ '\n';
             file<<out;
         }
+        QMessageBox::information(this, "Info", QString::fromStdString("Export successful"));
 
         file.close();
-    }else if(cmd == 5){
-        tipareste(srv.allCos());
-    }
+    });
 }
 
 void GUI::anyOf(){
@@ -255,12 +382,17 @@ void GUI::generate(){
     srv.addFilm("Dirty Dancing", "romcom", 1980, "Patrick Swayze");
     srv.addFilm("Legends of the fall", "drama", 1990, "Brad Pitt");
     srv.addFilm("Madagascar", "comedie", 2005, "Leul Alex");
+    genuri.push_back("horror");
+    genuri.push_back("comedie");
+    genuri.push_back("romcom");
+    genuri.push_back("drama");
+    refreshBtns();
 }
 
 
 void GUI::initialize() {
     //main layout
-    QHBoxLayout *lyMain = new QHBoxLayout();
+    lyMain = new QHBoxLayout();
     this->setLayout(lyMain);
 
     //partea stanga
@@ -293,29 +425,58 @@ void GUI::initialize() {
     butoane->setLayout(lyButoane);
 
     QWidget* butoaneSt = new QWidget;
-    QFormLayout* lyBSt = new QFormLayout;
+    QVBoxLayout* lyBSt = new QVBoxLayout;
     butoaneSt->setLayout(lyBSt);
 
     QWidget* butoaneDr = new QWidget;
-    QFormLayout* lyBDr = new QFormLayout;
+    QVBoxLayout* lyBDr = new QVBoxLayout;
     butoaneDr->setLayout(lyBDr);
 
     lyBSt->addWidget(btnAdd);
-    lyBSt->addWidget(btnFind);
     lyBSt->addWidget(btnMod);
+    lyBDr->addWidget(btnFind);
     lyBDr->addWidget(btnDelete);
-    lyBDr->addWidget(btnUndo);
 
     lyButoane->addWidget(butoaneSt);
     lyButoane->addWidget(butoaneDr);
     lyForm->addWidget(butoane);
     lyLeft->addWidget(form);
 
+    QHBoxLayout* lySort = new QHBoxLayout;
+    sortGroupBox->setLayout(lySort);
+    lySort->addWidget(radioSrtTitlu);
+    lySort->addWidget(radioSrtActor);
+    lySort->addWidget(radioSrtAnGen);
+    btnSort = new QPushButton("Sorteaza");
+    lySort->addWidget(btnSort);
+    lyLeft->addWidget(sortGroupBox);
+
+    QHBoxLayout* lyFilter = new QHBoxLayout;
+    filterGroupBox->setLayout(lyFilter);
+    editFilter = new QLineEdit;
+    lyFilter->addWidget(editFilter);
+    lyFilter->addWidget(radioFilterTitlu);
+    lyFilter->addWidget(radioFilterAn);
+    btnFilter = new QPushButton("Filtreaza");
+    lyFilter->addWidget(btnFilter);
+    lyLeft->addWidget(filterGroupBox);
+
     //partea dreapta
     QWidget* right = new QWidget;
     QVBoxLayout* lyRight = new QVBoxLayout;
     right->setLayout(lyRight);
 
+    //deasupra tabel
+    QGroupBox* deasupraTabelBox = new QGroupBox;
+    QHBoxLayout* lyDeasupraTabel = new QHBoxLayout;
+    btnReload = new QPushButton("Reload");
+    btnCos = new QPushButton("Cos");
+    deasupraTabelBox->setLayout(lyDeasupraTabel);
+    lyDeasupraTabel->addWidget(btnReload);
+    lyDeasupraTabel->addWidget(btnUndo);
+    lyDeasupraTabel->addWidget(btnCos);
+
+    //tabel
     int nLines = 10;
     int nColumns = 4;
     tableFilme = new QTableWidget{nLines, nColumns};
@@ -326,8 +487,19 @@ void GUI::initialize() {
     this->tableFilme->setHorizontalHeaderLabels(tbHeaderList);
     this->tableFilme->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
-    lyRight->addWidget(tableFilme);
+    //sub tabel
 
+    lyBtnDinamice = new QVBoxLayout;
+    subTabelBox = new QGroupBox;
+    subTabelBox->setLayout(lyBtnDinamice);
+
+
+
+    lyRight->addWidget(deasupraTabelBox);
+    lyRight->addWidget(tableFilme);
+    lyRight->addWidget(subTabelBox);
+
+    //main
     lyMain->addWidget(left);
     lyMain->addWidget(right);
 }
@@ -338,4 +510,8 @@ void GUI::connectSignalsSlots(){
     QObject::connect(btnMod, &QPushButton::clicked, this, &GUI::modUI);
     QObject::connect(btnDelete, &QPushButton::clicked, this, &GUI::deleteUI);
     QObject::connect(btnUndo, &QPushButton::clicked, this, &GUI::undoUI);
+    QObject::connect(btnSort, &QPushButton::clicked, this, &GUI::sortUI);
+    QObject::connect(btnFilter, &QPushButton::clicked, this, &GUI::filterUI);
+    QObject::connect(btnReload, &QPushButton::clicked, this,  [&](){ reloadFilme(srv.getAll());});
+    QObject::connect(btnCos, &QPushButton::clicked, this,  &GUI::cosUI);
 }

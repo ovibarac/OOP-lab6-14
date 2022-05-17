@@ -99,6 +99,15 @@ vector<Film> FilmService::filtrareAn(int an) {
     });
 }
 
+vector<Film> FilmService::filtrareGen(string gen) {
+    /*
+     * Filtrare dupa an aparitie
+     */
+    return filtreaza([gen](const Film& f){
+        return f.getGen() == gen;
+    });
+}
+
 vector<Film> FilmService::sortByTitlu(){
     /*
      * Sorteaza dupa titlu

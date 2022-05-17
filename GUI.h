@@ -15,10 +15,22 @@
 #include <QString>
 #include <QHeaderView>
 #include <QMessageBox>
+#include <QGroupBox>
+#include <QRadioButton>
+#include <QListWidget>
+#include <QListWidgetItem>
 
 class GUI : public QWidget{
 private:
     FilmService& srv;
+
+    QHBoxLayout *lyMain;
+
+    vector<QPushButton*> btnDinamice;
+    vector<string> genuri;
+
+    QVBoxLayout* lyBtnDinamice;
+    QGroupBox* subTabelBox;
 
     QLabel* lblTitlu = new QLabel{"Titlu film:"};
     QLabel* lblGen = new QLabel{"Gen film:"};
@@ -31,12 +43,31 @@ private:
     QLineEdit* editActor;
 
     QPushButton* btnAdd;
+    QPushButton* btnReload;
     QPushButton* btnFind;
     QPushButton* btnMod;
     QPushButton* btnDelete;
     QPushButton* btnUndo;
+    QPushButton* btnSort;
+    QPushButton* btnFilter;
+    QPushButton* btnCos;
+
+    QGroupBox* sortGroupBox = new QGroupBox("Sortare");
+    QGroupBox* filterGroupBox = new QGroupBox("Filtrare");
+
+    QRadioButton* radioSrtTitlu = new QRadioButton(QString::fromStdString("Titlu"));
+    QRadioButton* radioSrtActor = new QRadioButton(QString::fromStdString("Actor"));
+    QRadioButton* radioSrtAnGen = new QRadioButton(QString::fromStdString("An+Gen"));
+
+    QLineEdit* editFilter;
+    QRadioButton* radioFilterTitlu = new QRadioButton(QString::fromStdString("Titlu"));
+    QRadioButton* radioFilterAn = new QRadioButton(QString::fromStdString("An"));
 
     QTableWidget* tableFilme;
+    QTableWidget* tableCos;
+    QListWidget* qlistCos;
+
+    void refreshBtns();
     /*
      * Citeste datele de la tastatura si adauga un film
      */
@@ -78,6 +109,8 @@ private:
 
     void reloadFilme(vector<Film> filme);
 
+    void reloadCos(vector<Film> filme);
+
 public:
     GUI(FilmService& s): srv{s}{
         initialize();
@@ -91,6 +124,7 @@ public:
      */
     void generate();
 
+    void genuriList();
 
 };
 

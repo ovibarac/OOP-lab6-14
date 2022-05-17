@@ -77,6 +77,8 @@ public:
 
     vector<Film> filtrareAn(int an);
 
+    vector<Film> filtrareGen(string gen);
+
     vector<Film> sortByTitlu();
 
     vector<Film> sortByActor();
