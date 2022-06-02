@@ -278,6 +278,12 @@
 			null
 		],
 		[
+			"/home/ovi/work/oop/qtlab10/CosGUI.h",
+			"MU",
+			"EWIEGA46WW/moc_CosGUI.cpp",
+			null
+		],
+		[
 			"/home/ovi/work/oop/qtlab10/Film.h",
 			"MU",
 			"EWIEGA46WW/moc_Film.cpp",
@@ -305,6 +311,12 @@
 			"/home/ovi/work/oop/qtlab10/MyVector.h",
 			"MU",
 			"EWIEGA46WW/moc_MyVector.cpp",
+			null
+		],
+		[
+			"/home/ovi/work/oop/qtlab10/Observer.h",
+			"MU",
+			"EWIEGA46WW/moc_Observer.cpp",
 			null
 		],
 		[
@@ -377,6 +389,7 @@
 	"SOURCES" : 
 	[
 		[ "/home/ovi/work/oop/qtlab10/Cos.cpp", "MU", null ],
+		[ "/home/ovi/work/oop/qtlab10/CosGUI.cpp", "MU", null ],
 		[ "/home/ovi/work/oop/qtlab10/Film.cpp", "MU", null ],
 		[ "/home/ovi/work/oop/qtlab10/FilmRepo.cpp", "MU", null ],
 		[ "/home/ovi/work/oop/qtlab10/FilmService.cpp", "MU", null ],

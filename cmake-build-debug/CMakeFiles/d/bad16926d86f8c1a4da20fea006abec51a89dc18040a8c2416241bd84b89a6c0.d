@@ -126,6 +126,8 @@ qtlab10_autogen/timestamp: \
   ../CMakeLists.txt \
   ../Cos.cpp \
   ../Cos.h \
+  ../CosGUI.cpp \
+  ../CosGUI.h \
   ../Film.cpp \
   ../Film.h \
   ../FilmRepo.cpp \
@@ -135,6 +137,7 @@ qtlab10_autogen/timestamp: \
   ../GUI.cpp \
   ../GUI.h \
   ../MyVector.h \
+  ../Observer.h \
   ../UI.cpp \
   ../UI.h \
   ../Undo.h \

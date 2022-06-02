@@ -5,6 +5,7 @@
 #ifndef QTLAB10_GUI_H
 #define QTLAB10_GUI_H
 #include "FilmService.h"
+#include "Observer.h"
 #include <QtWidgets/QApplication>
 #include <QLabel>
 #include <QHBoxLayout>
@@ -19,10 +20,13 @@
 #include <QRadioButton>
 #include <QListWidget>
 #include <QListWidgetItem>
+#include "CosGUI.h"
 
 class GUI : public QWidget{
 private:
     FilmService& srv;
+//    CosCRUDGUI cosCRUD{srv};
+    vector<CosCRUDGUI*> allCosCRUD;
 
     QHBoxLayout *lyMain;
 
@@ -51,6 +55,7 @@ private:
     QPushButton* btnSort;
     QPushButton* btnFilter;
     QPushButton* btnCos;
+    QPushButton* btnCosR;
 
     QGroupBox* sortGroupBox = new QGroupBox("Sortare");
     QGroupBox* filterGroupBox = new QGroupBox("Filtrare");
@@ -65,7 +70,7 @@ private:
 
     QTableWidget* tableFilme;
     QTableWidget* tableCos;
-    QListWidget* qlistCos;
+
 
     void refreshBtns();
     /*
@@ -109,8 +114,6 @@ private:
 
     void reloadFilme(vector<Film> filme);
 
-    void reloadCos(vector<Film> filme);
-
 public:
     GUI(FilmService& s): srv{s}{
         initialize();
@@ -127,6 +130,5 @@ public:
     void genuriList();
 
 };
-
 
 #endif //QTLAB10_GUI_H

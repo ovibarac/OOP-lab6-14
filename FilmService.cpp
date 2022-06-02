@@ -155,10 +155,12 @@ vector<Film> FilmService::sortByAn(vector<Film> rez){
 void FilmService::addCos(string titlu){
     auto f = repo.find(titlu);
     cos.add(f);
+    notify();
 }
 
 void FilmService::golesteCos() {
     cos.goleste();
+    notify();
 }
 
 void FilmService::generateCos(int nrFilme) {
@@ -170,6 +172,7 @@ void FilmService::generateCos(int nrFilme) {
         auto f = getAll()[random];
         cos.add(f);
     }
+    notify();
 }
 
 bool FilmService::anyOfGen(string gen){

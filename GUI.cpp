@@ -239,115 +239,12 @@ void GUI::sortUI() {
     }
 }
 
-void GUI::reloadCos(vector<Film> filme) {
-    //reincarca tabelul
-//    this->tableCos->clearContents();
-//    this->tableCos->setRowCount(filme.size());
-//
-//    int lineNumber = 0;
-//    for(auto& f : filme){
-//        this->tableCos->setItem(lineNumber, 0, new QTableWidgetItem(QString::fromStdString(f.getTitlu())));
-//        this->tableCos->setItem(lineNumber, 1, new QTableWidgetItem(QString::fromStdString(f.getGen())));
-//        this->tableCos->setItem(lineNumber, 2, new QTableWidgetItem(QString::number(f.getAn())));
-//        this->tableCos->setItem(lineNumber, 3, new QTableWidgetItem(QString::fromStdString(f.getActor())));
-//        lineNumber++;
-//    }
-//
-    this->qlistCos->clear();
-    for(auto& f : filme){
-        string linie = f.getTitlu() + " " + f.getGen() + " " + to_string(f.getAn()) + " " + f.getActor();
-        qlistCos->addItem(QString::fromStdString(linie));
-    }
-}
+
 
 void GUI::cosUI() {
-    QWidget* cosWindow = new QWidget;
-    cosWindow->show();
-    QHBoxLayout* lyMainCos = new QHBoxLayout;
-    cosWindow->setLayout(lyMainCos);
-    QPushButton* btnAddCos = new QPushButton("Adauga");
-    QPushButton* btnEmptyCos = new QPushButton("Goleste cos");
-    QPushButton* btnGenCos = new QPushButton("Genereaza cos");
-    QPushButton* btnExportCos = new QPushButton("Export cos");
-
-    //stanga
-    QWidget* drCos = new QWidget;
-    QVBoxLayout* lyDrCos = new QVBoxLayout;
-    drCos->setLayout(lyDrCos);
-    int lines = 10;
-    int cols = 4;
-//    tableCos = new QTableWidget(lines, cols);
-    qlistCos = new QListWidget();
-//    QStringList tableHeaderCos;
-//    tableHeaderCos << "Titlu" << "Gen" << "An" << "Actor principal";
-//    tableCos->setHorizontalHeaderLabels(tableHeaderCos);
-//    tableCos->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-//    lyDrCos->addWidget(tableCos);
-    lyDrCos->addWidget(qlistCos);
-
-    //dreapta
-    QWidget* stCos = new QWidget;
-    QVBoxLayout* lyStCos = new QVBoxLayout;
-    stCos->setLayout(lyStCos);
-
-    QLineEdit* editTitluCos = new QLineEdit;
-    QHBoxLayout* lyAddCos = new QHBoxLayout;
-    QWidget* liniaAddCos = new QWidget;
-    liniaAddCos->setLayout(lyAddCos);
-    lyAddCos->addWidget(editTitluCos);
-    lyAddCos->addWidget(btnAddCos);
-
-    QLineEdit* editGenerate = new QLineEdit;
-    QHBoxLayout* lyGenCos = new QHBoxLayout;
-    QWidget* liniaGenCos = new QWidget;
-    liniaGenCos->setLayout(lyGenCos);
-    lyGenCos->addWidget(editGenerate);
-    lyGenCos->addWidget(btnGenCos);
-
-    QLineEdit* editExport = new QLineEdit;
-    QHBoxLayout* lyExCos = new QHBoxLayout;
-    QWidget* liniaExCos = new QWidget;
-    liniaExCos->setLayout(lyExCos);
-    lyExCos->addWidget(editExport);
-    lyExCos->addWidget(btnExportCos);
-
-    lyStCos->addWidget(liniaAddCos);
-    lyStCos->addWidget(btnEmptyCos);
-    lyStCos->addWidget(liniaGenCos);
-    lyStCos->addWidget(liniaExCos);
-
-    //main layout (is invers)
-    lyMainCos->addWidget(drCos);
-    lyMainCos->addWidget(stCos);
-
-    QObject::connect(btnAddCos, &QPushButton::clicked, [&, editTitluCos](){
-        string text = editTitluCos->text().toStdString();
-        srv.addCos(text);
-        reloadCos(srv.allCos());
-    });
-
-    QObject::connect(btnEmptyCos, &QPushButton::clicked, [&](){
-        srv.golesteCos();
-        reloadCos(srv.allCos());
-    });
-
-    QObject::connect(btnGenCos, &QPushButton::clicked, [&, editGenerate](){
-        int nr = editGenerate->text().toInt();
-        srv.generateCos(nr);
-        reloadCos(srv.allCos());
-    });
-
-    QObject::connect(btnExportCos, &QPushButton::clicked, [&, editExport](){
-        string fisier = editExport->text().toStdString();
-        ofstream file(fisier);
-        for(auto& film : srv.allCos()){
-            string out = film.getTitlu() + ", " + film.getGen() + ", " + to_string(film.getAn()) + ", " + film.getActor()+ '\n';
-            file<<out;
-        }
-        QMessageBox::information(this, "Info", QString::fromStdString("Export successful"));
-
-        file.close();
-    });
+    CosCRUDGUI* cos = new CosCRUDGUI(srv);
+    cos->show();
+    allCosCRUD.push_back(cos);
 }
 
 void GUI::anyOf(){
@@ -470,11 +367,13 @@ void GUI::initialize() {
     QGroupBox* deasupraTabelBox = new QGroupBox;
     QHBoxLayout* lyDeasupraTabel = new QHBoxLayout;
     btnReload = new QPushButton("Reload");
-    btnCos = new QPushButton("Cos");
+    btnCos = new QPushButton("Cos CRUD");
+    btnCosR = new QPushButton("Cos Read Only");
     deasupraTabelBox->setLayout(lyDeasupraTabel);
     lyDeasupraTabel->addWidget(btnReload);
     lyDeasupraTabel->addWidget(btnUndo);
     lyDeasupraTabel->addWidget(btnCos);
+    lyDeasupraTabel->addWidget(btnCosR);
 
     //tabel
     int nLines = 10;

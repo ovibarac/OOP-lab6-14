@@ -7,7 +7,7 @@
 #include "Film.h"
 #include <vector>
 
-class Cos {
+class Cos{
 private:
     vector<Film> all;
 

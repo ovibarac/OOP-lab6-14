@@ -12,8 +12,9 @@
 #include <functional>
 #include "Cos.h"
 #include "Undo.h"
+#include "Observer.h"
 
-class FilmService {
+class FilmService : public Observable{
     FilmRepo &repo;
     Validator &val;
     Cos &cos;

@@ -144,6 +144,14 @@ build CMakeFiles/qtlab10.dir/Cos.cpp.o: CXX_COMPILER__qtlab10_Debug /home/ovi/wo
   OBJECT_DIR = CMakeFiles/qtlab10.dir
   OBJECT_FILE_DIR = CMakeFiles/qtlab10.dir
 
+build CMakeFiles/qtlab10.dir/CosGUI.cpp.o: CXX_COMPILER__qtlab10_Debug /home/ovi/work/oop/qtlab10/CosGUI.cpp || cmake_object_order_depends_target_qtlab10
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles/qtlab10.dir/CosGUI.cpp.o.d
+  FLAGS = -g -fPIC -pthread -std=gnu++17
+  INCLUDES = -I/home/ovi/work/oop/qtlab10/cmake-build-debug/qtlab10_autogen/include -isystem /home/ovi/Programs/Qt/6.2.4/gcc_64/include/QtCore -isystem /home/ovi/Programs/Qt/6.2.4/gcc_64/include -isystem /home/ovi/Programs/Qt/6.2.4/gcc_64/mkspecs/linux-g++ -isystem /home/ovi/Programs/Qt/6.2.4/gcc_64/include/QtGui -isystem /home/ovi/Programs/Qt/6.2.4/gcc_64/include/QtWidgets
+  OBJECT_DIR = CMakeFiles/qtlab10.dir
+  OBJECT_FILE_DIR = CMakeFiles/qtlab10.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target qtlab10
@@ -152,7 +160,7 @@ build CMakeFiles/qtlab10.dir/Cos.cpp.o: CXX_COMPILER__qtlab10_Debug /home/ovi/wo
 #############################################
 # Link the executable qtlab10
 
-build qtlab10: CXX_EXECUTABLE_LINKER__qtlab10_Debug CMakeFiles/qtlab10.dir/qtlab10_autogen/mocs_compilation.cpp.o CMakeFiles/qtlab10.dir/main.cpp.o CMakeFiles/qtlab10.dir/GUI.cpp.o CMakeFiles/qtlab10.dir/Film.cpp.o CMakeFiles/qtlab10.dir/FilmRepo.cpp.o CMakeFiles/qtlab10.dir/FilmService.cpp.o CMakeFiles/qtlab10.dir/Validator.cpp.o CMakeFiles/qtlab10.dir/UI.cpp.o CMakeFiles/qtlab10.dir/Cos.cpp.o | /home/ovi/Programs/Qt/6.2.4/gcc_64/lib/libQt6Widgets.so.6.2.4 /home/ovi/Programs/Qt/6.2.4/gcc_64/lib/libQt6Gui.so.6.2.4 /home/ovi/Programs/Qt/6.2.4/gcc_64/lib/libQt6Core.so.6.2.4 /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so || qtlab10_autogen qtlab10_autogen_timestamp_deps
+build qtlab10: CXX_EXECUTABLE_LINKER__qtlab10_Debug CMakeFiles/qtlab10.dir/qtlab10_autogen/mocs_compilation.cpp.o CMakeFiles/qtlab10.dir/main.cpp.o CMakeFiles/qtlab10.dir/GUI.cpp.o CMakeFiles/qtlab10.dir/Film.cpp.o CMakeFiles/qtlab10.dir/FilmRepo.cpp.o CMakeFiles/qtlab10.dir/FilmService.cpp.o CMakeFiles/qtlab10.dir/Validator.cpp.o CMakeFiles/qtlab10.dir/UI.cpp.o CMakeFiles/qtlab10.dir/Cos.cpp.o CMakeFiles/qtlab10.dir/CosGUI.cpp.o | /home/ovi/Programs/Qt/6.2.4/gcc_64/lib/libQt6Widgets.so.6.2.4 /home/ovi/Programs/Qt/6.2.4/gcc_64/lib/libQt6Gui.so.6.2.4 /home/ovi/Programs/Qt/6.2.4/gcc_64/lib/libQt6Core.so.6.2.4 /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so || qtlab10_autogen qtlab10_autogen_timestamp_deps
   FLAGS = -g
   LINK_LIBRARIES = -Wl,-rpath,/home/ovi/Programs/Qt/6.2.4/gcc_64/lib  /home/ovi/Programs/Qt/6.2.4/gcc_64/lib/libQt6Widgets.so.6.2.4  /home/ovi/Programs/Qt/6.2.4/gcc_64/lib/libQt6Gui.so.6.2.4  /home/ovi/Programs/Qt/6.2.4/gcc_64/lib/libQt6Core.so.6.2.4  -pthread  /usr/lib/x86_64-linux-gnu/libGLX.so  /usr/lib/x86_64-linux-gnu/libOpenGL.so
   OBJECT_DIR = CMakeFiles/qtlab10.dir
