@@ -20,7 +20,7 @@
 #include <QRadioButton>
 #include <QListWidget>
 #include <QListWidgetItem>
-
+#include <QPainter>
 
 class CosCRUDGUI : public QWidget, Observer{
 private:
@@ -57,6 +57,33 @@ public:
 };
 
 class CosReadOnlyGUI : public QWidget, Observer{
+private:
+    FilmService& srv;
+
+    void paintEvent(QPaintEvent*) override{
+        QPainter p {this};
+        int x=0;
+        int y=0;
+        for(const auto& film : srv.allCos()){
+            x=rand() % 400 + 1;
+            y=rand() % 400 +1;
+            QRect rect(x,0,10,y);
+
+            p.drawRect(rect);
+        }
+    }
+
+    ~CosReadOnlyGUI(){
+        srv.removeObserver(this);
+    }
+public:
+    CosReadOnlyGUI(FilmService& srv):srv{srv}{
+        srv.addObserver(this);
+    }
+
+    void update()override{
+        repaint();
+    }
 
 };
 

@@ -25,8 +25,9 @@
 class GUI : public QWidget{
 private:
     FilmService& srv;
-//    CosCRUDGUI cosCRUD{srv};
+
     vector<CosCRUDGUI*> allCosCRUD;
+    vector<CosReadOnlyGUI*> allCosROnly;
 
     QHBoxLayout *lyMain;
 
@@ -69,8 +70,6 @@ private:
     QRadioButton* radioFilterAn = new QRadioButton(QString::fromStdString("An"));
 
     QTableWidget* tableFilme;
-    QTableWidget* tableCos;
-
 
     void refreshBtns();
     /*
@@ -103,6 +102,8 @@ private:
     void sortUI();
 
     void cosUI();
+
+    void cosRUI();
 
     void anyOf();
 

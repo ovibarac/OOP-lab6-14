@@ -244,7 +244,15 @@ void GUI::sortUI() {
 void GUI::cosUI() {
     CosCRUDGUI* cos = new CosCRUDGUI(srv);
     cos->show();
+    cos->update();
     allCosCRUD.push_back(cos);
+}
+
+void GUI::cosRUI() {
+    CosReadOnlyGUI* cos = new CosReadOnlyGUI(srv);
+    cos->show();
+    cos->update();
+    allCosROnly.push_back(cos);
 }
 
 void GUI::anyOf(){
@@ -413,4 +421,5 @@ void GUI::connectSignalsSlots(){
     QObject::connect(btnFilter, &QPushButton::clicked, this, &GUI::filterUI);
     QObject::connect(btnReload, &QPushButton::clicked, this,  [&](){ reloadFilme(srv.getAll());});
     QObject::connect(btnCos, &QPushButton::clicked, this,  &GUI::cosUI);
+    QObject::connect(btnCosR, &QPushButton::clicked, this,  &GUI::cosRUI);
 }
