@@ -136,6 +136,7 @@ qtlab10_autogen/timestamp: \
   ../FilmService.h \
   ../GUI.cpp \
   ../GUI.h \
+  ../MyTableModel.h \
   ../MyVector.h \
   ../Observer.h \
   ../UI.cpp \

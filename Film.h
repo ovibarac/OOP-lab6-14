@@ -15,9 +15,17 @@ class Film {
     int an;
     string actor;
 public:
-    Film() = default;
+    Film() = delete;
 
-    Film(const string t, string g, int an, string a):titlu{t}, gen{g}, an{an}, actor{a}{}
+    Film(string t, string g, int an, string a):titlu{t}, gen{g}, an{an}, actor{a}{}
+
+    Film& operator=(const Film& ot){
+        this->titlu = ot.titlu;
+        this->gen = ot.gen;
+        this->an = ot.an;
+        this->actor = ot.actor;
+        return (*this);
+    }
 
     string getTitlu() const{
         return titlu;

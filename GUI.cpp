@@ -19,17 +19,18 @@ using std::cin;
 
 void GUI::reloadFilme(vector<Film> filme){
     //reincarca tabelul
-    this->tableFilme->clearContents();
-    this->tableFilme->setRowCount(filme.size());
-
-    int lineNumber = 0;
-    for(auto& f : filme){
-        this->tableFilme->setItem(lineNumber, 0, new QTableWidgetItem(QString::fromStdString(f.getTitlu())));
-        this->tableFilme->setItem(lineNumber, 1, new QTableWidgetItem(QString::fromStdString(f.getGen())));
-        this->tableFilme->setItem(lineNumber, 2, new QTableWidgetItem(QString::number(f.getAn())));
-        this->tableFilme->setItem(lineNumber, 3, new QTableWidgetItem(QString::fromStdString(f.getActor())));
-        lineNumber++;
-    }
+//    this->tableFilme->clearContents();
+//    this->tableFilme->setRowCount(filme.size());
+//
+//    int lineNumber = 0;
+//    for(auto& f : filme){
+//        this->tableFilme->setItem(lineNumber, 0, new QTableWidgetItem(QString::fromStdString(f.getTitlu())));
+//        this->tableFilme->setItem(lineNumber, 1, new QTableWidgetItem(QString::fromStdString(f.getGen())));
+//        this->tableFilme->setItem(lineNumber, 2, new QTableWidgetItem(QString::number(f.getAn())));
+//        this->tableFilme->setItem(lineNumber, 3, new QTableWidgetItem(QString::fromStdString(f.getActor())));
+//        lineNumber++;
+//    }
+    this->model->setFilme(filme);
 }
 
 void GUI::genuriList(){
@@ -296,6 +297,7 @@ void GUI::generate(){
 
 
 void GUI::initialize() {
+
     //main layout
     lyMain = new QHBoxLayout();
     this->setLayout(lyMain);
@@ -384,15 +386,15 @@ void GUI::initialize() {
     lyDeasupraTabel->addWidget(btnCosR);
 
     //tabel
-    int nLines = 10;
-    int nColumns = 4;
-    tableFilme = new QTableWidget{nLines, nColumns};
+//    int nLines = 10;
+//    int nColumns = 4;
+//    tableFilme = new QTableWidget{nLines, nColumns};
 
     //header tabel
-    QStringList tbHeaderList;
-    tbHeaderList << "Titlu"<<"Gen"<<"An"<<"Actor principal";
-    this->tableFilme->setHorizontalHeaderLabels(tbHeaderList);
-    this->tableFilme->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+//    QStringList tbHeaderList;
+//    tbHeaderList << "Titlu"<<"Gen"<<"An"<<"Actor principal";
+//    this->tableFilme->setHorizontalHeaderLabels(tbHeaderList);
+//    this->tableFilme->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
     //sub tabel
 
@@ -409,6 +411,7 @@ void GUI::initialize() {
     //main
     lyMain->addWidget(left);
     lyMain->addWidget(right);
+
 }
 
 void GUI::connectSignalsSlots(){
@@ -422,4 +425,27 @@ void GUI::connectSignalsSlots(){
     QObject::connect(btnReload, &QPushButton::clicked, this,  [&](){ reloadFilme(srv.getAll());});
     QObject::connect(btnCos, &QPushButton::clicked, this,  &GUI::cosUI);
     QObject::connect(btnCosR, &QPushButton::clicked, this,  &GUI::cosRUI);
+//    QObject::connect(tableFilme->selectionModel(), &QItemSelectionModel::selectionChanged, [this]() {
+//        if (tableFilme->selectionModel()->selectedIndexes().isEmpty()) {
+//            editTitlu->setText("");
+//            editGen->setText("");
+//            editAn->setText("");
+//            editActor->setText("");
+//            return;
+//        }
+//        int selRow = tableFilme->selectionModel()->selectedIndexes().at(0).row();
+//        auto cel0Index = tableFilme->model()->index(selRow, 0);
+//        auto cel1Index = tableFilme->model()->index(selRow, 1);
+//        auto cel2Index = tableFilme->model()->index(selRow, 2);
+//        auto cel3Index = tableFilme->model()->index(selRow, 3);
+//        auto cellValue1 = tableFilme->model()->data(cel0Index, Qt::DisplayRole).toString();
+//        auto cellValue2 = tableFilme->model()->data(cel1Index, Qt::DisplayRole).toString();
+//        auto cellValue3 = tableFilme->model()->data(cel2Index, Qt::DisplayRole).toString();
+//        auto cellValue4 = tableFilme->model()->data(cel3Index, Qt::DisplayRole).toString();
+//
+//        editTitlu->setText(cellValue1);
+//        editGen->setText(cellValue2);
+//        editAn->setText(cellValue3);
+//        editActor->setText(cellValue4);
+//    });
 }

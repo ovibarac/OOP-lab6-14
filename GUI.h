@@ -21,6 +21,9 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 #include "CosGUI.h"
+#include <QTableView>
+#include "MyTableModel.h"
+#include <QModelIndex>
 
 class GUI : public QWidget{
 private:
@@ -69,7 +72,11 @@ private:
     QRadioButton* radioFilterTitlu = new QRadioButton(QString::fromStdString("Titlu"));
     QRadioButton* radioFilterAn = new QRadioButton(QString::fromStdString("An"));
 
-    QTableWidget* tableFilme;
+//    QTableWidget* tableFilme;
+    MyTableModel* model;// = new MyTableModel{srv.getAll()};
+    QTableView* tableFilme = new QTableView;
+
+
 
     void refreshBtns();
     /*
@@ -117,6 +124,8 @@ private:
 
 public:
     GUI(FilmService& s): srv{s}{
+        this->model = new MyTableModel{srv.getAll()};
+        this->tableFilme->setModel(model);
         initialize();
         connectSignalsSlots();
         generate();

@@ -39,6 +39,7 @@ void CosCRUDGUI::reloadCos(vector<Film> filme) {
 }
 
 void CosCRUDGUI::initialize() {
+
     lyMainCos = new QHBoxLayout;
     this->setLayout(lyMainCos);
     btnAddCos = new QPushButton("Adauga");

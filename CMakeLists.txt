@@ -14,7 +14,8 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 add_executable(qtlab10 main.cpp GUI.cpp GUI.h Film.cpp Film.h FilmRepo.cpp FilmRepo.h
-        FilmService.cpp FilmService.h Validator.cpp Validator.h UI.cpp UI.h MyVector.h Cos.cpp Cos.h Undo.h Observer.h CosGUI.cpp CosGUI.h)
+        FilmService.cpp FilmService.h Validator.cpp Validator.h UI.cpp UI.h MyVector.h Cos.cpp Cos.h Undo.h Observer.h CosGUI.cpp
+        CosGUI.h MyTableModel.h)
 target_link_libraries(qtlab10
         Qt::Core
         Qt::Gui
