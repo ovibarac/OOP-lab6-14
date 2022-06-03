@@ -45,7 +45,7 @@ public:
 		return QVariant{};
 	}
 
-	void setFilme(const vector<Film> filme) {
+	void setFilme(const vector<Film>& filme) {
 		this->filme = filme;
 		auto topLeft = createIndex(0, 0);
 		auto bottomR = createIndex(rowCount(), columnCount());

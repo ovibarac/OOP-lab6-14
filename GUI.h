@@ -76,7 +76,10 @@ private:
     MyTableModel* model;// = new MyTableModel{srv.getAll()};
     QTableView* tableFilme = new QTableView;
 
-
+    QWidget* right;
+    QVBoxLayout* lyRight;
+    QGroupBox* deasupraTabelBox;
+    QHBoxLayout* lyDeasupraTabel;
 
     void refreshBtns();
     /*
@@ -124,11 +127,13 @@ private:
 
 public:
     GUI(FilmService& s): srv{s}{
+        initialize();
+        generate();
         this->model = new MyTableModel{srv.getAll()};
         this->tableFilme->setModel(model);
-        initialize();
+
         connectSignalsSlots();
-        generate();
+
         reloadFilme(srv.getAll());
     }
 

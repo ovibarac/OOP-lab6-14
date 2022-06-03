@@ -31,6 +31,10 @@ void GUI::reloadFilme(vector<Film> filme){
 //        lineNumber++;
 //    }
     this->model->setFilme(filme);
+    delete(tableFilme);
+    tableFilme = new QTableView;
+    tableFilme->setModel(model);
+    lyRight->addWidget(tableFilme);
 }
 
 void GUI::genuriList(){
@@ -369,13 +373,13 @@ void GUI::initialize() {
     lyLeft->addWidget(filterGroupBox);
 
     //partea dreapta
-    QWidget* right = new QWidget;
-    QVBoxLayout* lyRight = new QVBoxLayout;
+    right = new QWidget;
+    lyRight = new QVBoxLayout;
     right->setLayout(lyRight);
 
     //deasupra tabel
-    QGroupBox* deasupraTabelBox = new QGroupBox;
-    QHBoxLayout* lyDeasupraTabel = new QHBoxLayout;
+    deasupraTabelBox = new QGroupBox;
+    lyDeasupraTabel = new QHBoxLayout;
     btnReload = new QPushButton("Reload");
     btnCos = new QPushButton("Cos CRUD");
     btnCosR = new QPushButton("Cos Read Only");
@@ -405,8 +409,9 @@ void GUI::initialize() {
 
 
     lyRight->addWidget(deasupraTabelBox);
-    lyRight->addWidget(tableFilme);
     lyRight->addWidget(subTabelBox);
+    lyRight->addWidget(tableFilme);
+
 
     //main
     lyMain->addWidget(left);
@@ -425,27 +430,5 @@ void GUI::connectSignalsSlots(){
     QObject::connect(btnReload, &QPushButton::clicked, this,  [&](){ reloadFilme(srv.getAll());});
     QObject::connect(btnCos, &QPushButton::clicked, this,  &GUI::cosUI);
     QObject::connect(btnCosR, &QPushButton::clicked, this,  &GUI::cosRUI);
-//    QObject::connect(tableFilme->selectionModel(), &QItemSelectionModel::selectionChanged, [this]() {
-//        if (tableFilme->selectionModel()->selectedIndexes().isEmpty()) {
-//            editTitlu->setText("");
-//            editGen->setText("");
-//            editAn->setText("");
-//            editActor->setText("");
-//            return;
-//        }
-//        int selRow = tableFilme->selectionModel()->selectedIndexes().at(0).row();
-//        auto cel0Index = tableFilme->model()->index(selRow, 0);
-//        auto cel1Index = tableFilme->model()->index(selRow, 1);
-//        auto cel2Index = tableFilme->model()->index(selRow, 2);
-//        auto cel3Index = tableFilme->model()->index(selRow, 3);
-//        auto cellValue1 = tableFilme->model()->data(cel0Index, Qt::DisplayRole).toString();
-//        auto cellValue2 = tableFilme->model()->data(cel1Index, Qt::DisplayRole).toString();
-//        auto cellValue3 = tableFilme->model()->data(cel2Index, Qt::DisplayRole).toString();
-//        auto cellValue4 = tableFilme->model()->data(cel3Index, Qt::DisplayRole).toString();
-//
-//        editTitlu->setText(cellValue1);
-//        editGen->setText(cellValue2);
-//        editAn->setText(cellValue3);
-//        editActor->setText(cellValue4);
-//    });
+
 }
