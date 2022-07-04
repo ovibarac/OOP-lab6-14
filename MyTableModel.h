@@ -22,8 +22,6 @@ public:
 	}
 	//Returns the data stored under the given role for the item referred to by the index.
 	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override {
-//		qDebug() << "row:" << index.row() << " col:" << index.column() << " role" << role;
-		//qDebug() << index.data(role);
 
 		if (role == Qt::DisplayRole) {
 
@@ -50,6 +48,7 @@ public:
 		auto topLeft = createIndex(0, 0);
 		auto bottomR = createIndex(rowCount(), columnCount());
 		emit dataChanged(topLeft, bottomR);
+        emit layoutChanged();
 	}
 
 

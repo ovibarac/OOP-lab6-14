@@ -31,10 +31,10 @@ void GUI::reloadFilme(vector<Film> filme){
 //        lineNumber++;
 //    }
     this->model->setFilme(filme);
-    delete(tableFilme);
-    tableFilme = new QTableView;
-    tableFilme->setModel(model);
-    lyRight->addWidget(tableFilme);
+//    delete(tableFilme);
+//    tableFilme = new QTableView;
+//    tableFilme->setModel(model);
+//    lyRight->addWidget(tableFilme);
 }
 
 void GUI::genuriList(){
